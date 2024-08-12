@@ -1,4 +1,4 @@
-import { IconName } from "@fortawesome/fontawesome-svg-core";
+import { IconName, SizeProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Flex, Text, useMantineTheme } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
@@ -60,7 +60,7 @@ export default function Button(props: ButtonProps) {
       onClick={props.onClick}
     >
       {props.icon && (
-        <FontAwesomeIcon icon={props.icon as IconName || 'fa-play'} style={{ color: hovered && !props.disabled ? colors.iconColor.hovered : colors.iconColor.normal }} size={props.iconSize || 'sm'}/>
+        <FontAwesomeIcon icon={props.icon as IconName || 'fa-play'} style={{ color: hovered && !props.disabled ? colors.iconColor.hovered : colors.iconColor.normal }} size={props.iconSize as SizeProp || 'sm'}/>
       )}
 
       {props.text && (
