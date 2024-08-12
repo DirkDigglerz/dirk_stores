@@ -4,7 +4,7 @@ lua54 'yes'
 games { 'rdr3', 'gta5' } 
 author 'DirkScripts' 
 description 'React Boilerplate for FiveM | Uses mantine for theming' 
-version '1.0.0' 
+version      'main'
 
 shared_script{
   'src/settings/config.lua',
