@@ -60,14 +60,12 @@ jobs:
       - name: Update branch
         run: git push origin HEAD:main
 
-      - name: Extract and Format Version from fxmanifest.lua
-        id: get_version
+      - name: Verify file existence
         run: |
-          # Extract the version number
-          version=$(grep -E "^version\s+'[0-9]+\.[0-9]+\.[0-9]+'" fxmanifest.lua | sed "s/version\s*'\([^']*\)'/\1/")
-          # Remove leading/trailing spaces
-          version=$(echo "${version}" | xargs)
-          echo "VERSION=${version}" >> $GITHUB_ENV
+          echo "Listing files in the current directory:"
+          ls -al
+          echo "Listing files in the build directory:"
+          ls -al path/to/your/directory
 
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
@@ -81,4 +79,3 @@ jobs:
         env:
           CI: false
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
