@@ -4,7 +4,7 @@ lua54 'yes'
 games { 'rdr3', 'gta5' } 
 author 'DirkScripts' 
 description 'Stores | Clean Pack' 
-version      '1.0.7'
+version      '1.0.8'
 
 shared_script{
   'src/settings/config.lua',
