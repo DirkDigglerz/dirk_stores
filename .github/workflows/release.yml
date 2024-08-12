@@ -37,10 +37,6 @@ jobs:
         run: pnpm install
         working-directory: web
 
-      - name: Install package dependencies
-        run: pnpm install
-        working-directory: web
-
       - name: Run build
         run: pnpm build
         working-directory: web
@@ -88,7 +84,7 @@ jobs:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
           title: 'Latest Build'
           prerelease: false
-          files: ${{ github.repository_name }}.zip
+          files: ${{ github.repository }}.zip
           automatic_release_tag: 'latest_production'
 
         env:
