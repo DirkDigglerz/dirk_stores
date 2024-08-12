@@ -64,6 +64,9 @@ dependencies:
     version: 1.2.2
 
 devDependencies:
+  '@types/color-name':
+    specifier: ^1.1.4
+    version: 1.1.4
   '@types/react':
     specifier: ^18.2.63
     version: 18.2.63
@@ -1192,6 +1195,10 @@ packages:
     resolution: {integrity: sha512-WXCyOcRtH37HAUkpXhUduaxdm82b4GSlyTqajXviN4EfiuPgNYR109xMCKvpl6zPIpua0DGlMEDCq+g8EdoheQ==}
     dependencies:
       '@babel/types': 7.24.0
+    dev: true
+
+  /@types/color-name@1.1.4:
+    resolution: {integrity: sha512-hulKeREDdLFesGQjl96+4aoJSHY5b2GRjagzzcqCfIrWhe5vkCqIvrLbqzBaI1q94Vg8DNJZZqTR5ocdWmWclg==}
     dev: true
 
   /@types/estree@1.0.5:
