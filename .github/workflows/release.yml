@@ -47,10 +47,10 @@ jobs:
         env:
           CI: false
 
-          - name: Bump manifest version
-          run: node .github/actions/bump-manifest-version.js
-          env:
-            TGT_RELEASE_VERSION: ${{ github.ref_name }}
+      - name: Bump manifest version
+        run: node .github/actions/bump-manifest-version.js
+        env:
+          TGT_RELEASE_VERSION: ${{ github.ref_name }}
 
       - name: Push manifest change
         uses: EndBug/add-and-commit@v8
