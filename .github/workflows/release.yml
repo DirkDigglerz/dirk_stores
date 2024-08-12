@@ -63,9 +63,9 @@ jobs:
       - name: Extract and Format Version from fxmanifest.lua
         id: get_version
         run: |
-          # Ensure to use proper quoting and syntax
-          set -x
-          version=$(grep -E '^version\s+\'[^\']+\'' fxmanifest.lua | sed "s/version\s*'\([^']*\)'/\1/")
+          # Extract the version number
+          version=$(grep -E "^version\s+'[0-9]+\.[0-9]+\.[0-9]+'" fxmanifest.lua | sed "s/version\s*'\([^']*\)'/\1/")
+          # Remove leading/trailing spaces
           version=$(echo "${version}" | xargs)
           echo "VERSION=${version}" >> $GITHUB_ENV
 
