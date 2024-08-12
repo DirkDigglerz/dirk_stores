@@ -80,7 +80,7 @@ const colorNames = {
   LimeGreen: { r: 50, g: 205, b: 50 },
   Linen: { r: 250, g: 240, b: 230 },
   Magenta: { r: 255, g: 0, b: 255 },
-  Maroon: { r: 128, g: 0, b: 0 },
+  Maroon: { r: 128, g: 0, b: 0 }, // Maroon
   MediumAquaMarine: { r: 102, g: 205, b: 170 },
   MediumBlue: { r: 0, g: 0, b: 205 },
   MediumOrchid: { r: 186, g: 85, b: 211 },
