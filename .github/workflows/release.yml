@@ -73,7 +73,7 @@ jobs:
       - name: Extract version from fxmanifest.lua
         id: get_version
         run: |
-          version=$(grep -oP "(?<=version\s*'\K[\d.]+)" fxmanifest.lua)
+          version=$(awk -F"'" '/version/ {print $2}' fxmanifest.lua)
           echo "VERSION=$version" >> $GITHUB_ENV
 
       - name: Create Release
