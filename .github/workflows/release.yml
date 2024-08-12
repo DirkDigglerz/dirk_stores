@@ -64,7 +64,7 @@ jobs:
         id: get_version
         run: |
           # Extract the version number, ensuring to pick only the correct line
-          version=$(grep -E '^version\s+''\S+''$' fxmanifest.lua | awk -F"'" '{print $2}')
+          version=$(grep -E '^version\s+\'[^\']+\'' fxmanifest.lua | sed "s/version\s*'\([^']*\)'/\1/")
           # Remove leading/trailing spaces
           version=$(echo "${version}" | xargs)
           echo "VERSION=${version}" >> $GITHUB_ENV
