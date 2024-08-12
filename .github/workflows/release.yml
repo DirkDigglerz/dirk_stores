@@ -60,12 +60,24 @@ jobs:
       - name: Update branch
         run: git push origin HEAD:main
 
+
+      - name: Bundle files
+        run: |
+          mkdir -p ./temp/clean_stores
+          mkdir -p ./temp/clean_stores/web/
+          cp ./{README.md,fxmanifest.lua} ./temp/clean_stores
+          cp -r ./src ./temp/clean_stores
+          cp -r ./settings ./temp/clean_stores
+          cp -r ./web/build ./temp/clean_stores/web/
+          cd ./temp && zip -r ../clean_stores.zip ./clean_stores
+
+
       - name: Verify file existence
         run: |
           echo "Listing files in the current directory:"
           ls -al
           echo "Listing files in the build directory:"
-          ls -al path/to/your/directory
+          ls -al ./temp/clean_storess
 
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
