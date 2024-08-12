@@ -68,10 +68,7 @@ jobs:
           # Remove leading/trailing spaces
           version=$(echo "${version}" | xargs)
           echo "VERSION=${version}" >> $GITHUB_ENV
-
-      - name: Debug extracted version
-        run: echo "Extracted version: $VERSION"
-
+          
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         id: auto_release
