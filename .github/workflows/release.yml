@@ -70,23 +70,18 @@ jobs:
       #   with:
       #     ref: ${{ github.ref_name }}
           
-
-      - name: Bundle files
+      - name: Extract version from fxmanifest.lua
+        id: get_version
         run: |
-          mkdir -p ./temp/clean_stores
-          mkdir -p ./temp/clean_stores/web/
-          cp ./{README.md,fxmanifest.lua} ./temp/clean_stores
-          cp -r ./src ./temp/clean_stores
-          cp -r ./settings ./temp/clean_stores
-          cp -r ./web/build ./temp/clean_stores/web/
-          cd ./temp && zip -r ../clean_stores.zip ./clean_stores
+          version=$(grep -oP "(?<=version\s*'\K[\d.]+)" fxmanifest.lua)
+          echo "VERSION=$version" >> $GITHUB_ENV
 
       - name: Create Release
-        uses: 'marvinpinto/action-automatic-releases@v1.2.1'
+        uses: marvinpinto/action-automatic-releases@v1.2.1
         id: auto_release
         with:
-          repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          title: 'Latest Build'
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Release ${{ env.VERSION }}"
           prerelease: false
           files: clean_stores.zip
           automatic_release_tag: 'latest_production'
