@@ -37,6 +37,10 @@ jobs:
         run: pnpm install
         working-directory: web
 
+      - name: Install package dependencies
+        run: pnpm install
+        working-directory: web
+
       - name: Run build
         run: pnpm build
         working-directory: web
@@ -66,16 +70,16 @@ jobs:
       #   with:
       #     ref: ${{ github.ref_name }}
           
+
       - name: Bundle files
         run: |
-          REPO_NAME=$(basename $GITHUB_REPOSITORY)
-          mkdir -p ./temp/$REPO_NAME
-          mkdir -p ./temp/$REPO_NAME/web/
-          cp ./{README.md,fxmanifest.lua} ./temp/$REPO_NAME
-          cp -r ./src ./temp/$REPO_NAME
-          cp -r ./settings ./temp/$REPO_NAME
-          cp -r ./web/build ./temp/$REPO_NAME/web/
-          cd ./temp && zip -r ../$REPO_NAME.zip ./$REPO_NAME
+          mkdir -p ./temp/clean_stores
+          mkdir -p ./temp/clean_stores/web/
+          cp ./{README.md,fxmanifest.lua} ./temp/clean_stores
+          cp -r ./src ./temp/clean_stores
+          cp -r ./settings ./temp/clean_stores
+          cp -r ./web/build ./temp/clean_stores/web/
+          cd ./temp && zip -r ../clean_stores.zip ./clean_stores
 
       - name: Create Release
         uses: 'marvinpinto/action-automatic-releases@v1.2.1'
@@ -84,7 +88,7 @@ jobs:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
           title: 'Latest Build'
           prerelease: false
-          files: ${{ github.repository }}.zip
+          files: clean_stores.zip
           automatic_release_tag: 'latest_production'
 
         env:
