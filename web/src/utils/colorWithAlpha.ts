@@ -1,4 +1,8 @@
+
+
 import colorNames from 'color-name';
+
+
 
 function colorWithAlpha(color: string, alpha: number): string {
   const lowerCasedColor = color.toLowerCase() as keyof typeof colorNames;
