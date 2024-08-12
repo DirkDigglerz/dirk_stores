@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install archive tools
-        run: sudo apt install zip
+        run: sudo apt install -y zip
 
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -60,10 +60,12 @@ jobs:
       - name: Update branch
         run: git push origin HEAD:main
 
-      - name: Extract version from fxmanifest.lua
+      - name: Extract and Format Version from fxmanifest.lua
         id: get_version
         run: |
           version=$(awk -F"'" '/version/ {print $2}' fxmanifest.lua)
+          # Remove leading/trailing spaces
+          version=$(echo "${version}" | xargs)
           echo "VERSION=${version}" >> $GITHUB_ENV
 
       - name: Create Release
@@ -75,7 +77,6 @@ jobs:
           prerelease: false
           files: clean_stores.zip
           automatic_release_tag: 'latest_production'
-
         env:
           CI: false
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
