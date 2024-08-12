@@ -63,12 +63,13 @@ jobs:
       - name: Extract and Format Version from fxmanifest.lua
         id: get_version
         run: |
-          # Extract the version number, ensuring to pick only the correct line
+          set -x
+          # Extract the version number
           version=$(grep -E '^version\s+\'[^\']+\'' fxmanifest.lua | sed "s/version\s*'\([^']*\)'/\1/")
           # Remove leading/trailing spaces
           version=$(echo "${version}" | xargs)
           echo "VERSION=${version}" >> $GITHUB_ENV
-          
+
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         id: auto_release
