@@ -71,14 +71,6 @@ jobs:
           cp -r ./web/build ./temp/clean_stores/web/
           cd ./temp && zip -r ../clean_stores.zip ./clean_stores
 
-
-      - name: Verify file existence
-        run: |
-          echo "Listing files in the current directory:"
-          ls -al
-          echo "Listing files in the build directory:"
-          ls -al ./temp/clean_storess
-
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
         id: auto_release
