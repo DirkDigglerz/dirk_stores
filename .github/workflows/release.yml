@@ -37,10 +37,6 @@ jobs:
         run: pnpm install
         working-directory: web
 
-      - name: Install package dependencies
-        run: pnpm install
-        working-directory: web
-
       - name: Run build
         run: pnpm build
         working-directory: web
@@ -62,19 +58,13 @@ jobs:
           message: 'chore: bump manifest version to ${{ github.ref_name }}'
 
       - name: Update branch
-        working-directory: ./
         run: git push origin HEAD:main
 
-      # - name: Update tag ref
-      #   uses: EndBug/latest-tag@latest 
-      #   with:
-      #     ref: ${{ github.ref_name }}
-          
       - name: Extract version from fxmanifest.lua
         id: get_version
         run: |
           version=$(awk -F"'" '/version/ {print $2}' fxmanifest.lua)
-          echo "VERSION=$version" >> $GITHUB_ENV
+          echo "VERSION=${version}" >> $GITHUB_ENV
 
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
