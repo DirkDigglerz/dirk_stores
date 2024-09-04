@@ -11,7 +11,7 @@ export default function CartItem(props: CartItemProps & { addItem: (listing_id: 
     <Box style={{ position: 'relative' }} w="100%">
       {/* Box for the number */}
   
-        <Box
+      <Box
           style={{
             position: 'absolute',
             top: '-10%',

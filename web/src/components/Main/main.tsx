@@ -117,7 +117,8 @@ internalEvent([
         
         paymentMethods: [
           {id: 'cash', name: 'Cash', icon: 'money-bill-wave'},
-          {id: 'card', name: 'Card', icon: 'credit-card'}
+          {id: 'card', name: 'Card', icon: 'credit-card'},
+          {id: 'dumpster', name: 'NewbCoin', icon: 'credit-card'}
         ],
 
       },
@@ -137,6 +138,19 @@ internalEvent([
       items: [
         {
           listing_id: 'listing_1',
+          name: 'drivers_license',
+          price: 10,
+          label: 'Drivers License',
+          image: 'https://raw.githubusercontent.com/fazitanvir/items-images/main/license/driver_license.png',
+          metadata: [],
+          description: 'This is a drivers license I mean you could probably drive with it',
+          category: 'Health',
+          disableIcon: 'exclamation-triangle',
+          disableMessage: 'Out of Stock',
+          stock: 10
+        },
+        {
+          listing_id: 'listing_3',
           name: 'drivers_license',
           price: 10,
           label: 'Drivers License',

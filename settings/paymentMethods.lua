@@ -5,6 +5,7 @@ Config.paymentMethods = {
 
     remove = function(player, amount)
       --// Implement your own bank system here
+      
       return true
     end
   },
