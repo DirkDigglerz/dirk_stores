@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install archive tools
-        run: sudo apt install zip
+        run: sudo apt install -y zip
 
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -37,10 +37,6 @@ jobs:
         run: pnpm install
         working-directory: web
 
-      - name: Install package dependencies
-        run: pnpm install
-        working-directory: web
-
       - name: Run build
         run: pnpm build
         working-directory: web
@@ -62,15 +58,17 @@ jobs:
           message: 'chore: bump manifest version to ${{ github.ref_name }}'
 
       - name: Update branch
-        working-directory: ./
         run: git push origin HEAD:main
 
-      # - name: Update tag ref
-      #   uses: EndBug/latest-tag@latest 
-      #   with:
-      #     ref: ${{ github.ref_name }}
+      - name: Extract and Format Version from fxmanifest.lua
+        id: get_version
+        run: |
+          # Extract the version number
+          version=$(grep -E "^version\s+'[0-9]+\.[0-9]+\.[0-9]+'" fxmanifest.lua | sed "s/version\s*'\([^']*\)'/\1/")
+          # Remove leading/trailing spaces
+          version=$(echo "${version}" | xargs)
+          echo "VERSION=${version}" >> $GITHUB_ENV
           
-
       - name: Bundle files
         run: |
           mkdir -p ./temp/clean_stores
@@ -82,15 +80,14 @@ jobs:
           cd ./temp && zip -r ../clean_stores.zip ./clean_stores
 
       - name: Create Release
-        uses: 'marvinpinto/action-automatic-releases@v1.2.1'
+        uses: marvinpinto/action-automatic-releases@v1.2.1
         id: auto_release
         with:
-          repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          title: 'Latest Build'
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Release ${{ env.VERSION }}"
           prerelease: false
           files: clean_stores.zip
           automatic_release_tag: 'latest_production'
-
         env:
           CI: false
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
