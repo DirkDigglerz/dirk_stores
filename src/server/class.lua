@@ -1,9 +1,10 @@
-local Shops = {}
+local paymentMethods = require 'settings.paymentMethods'
+local Stores = {}
 
-local Shop = {}
-Shop.__index = Shop
+Store = {}
+Store.__index = Store
 
-function Shop:generateListingId()
+function Store:generateListingId()
   local id = string.format('%s_%s', self.id, math.random(1000, 9999))
   Wait(0)
   for k,v in pairs(self.stock) do
@@ -14,13 +15,17 @@ function Shop:generateListingId()
   return id
 end
 
-local function getItemImage(name)
-  return string.format('https://raw.githubusercontent.com/fazitanvir/items-images/main/%s.png', name)
+local function getItemLabel(name)
+  return name:gsub('_', ' '):gsub('(%l)(%w*)', function(a,b) return string.upper(a)..b end)
 end
 
-function Shop:sanitizeItems()
-  for k,v in pairs(self.stock) do
-    self.listing_id = self:generateListingId()
+local function getItemImage(name)
+  return string.format('%s%s.png', lib.settings.item_img_path, name)
+end
+
+function Store:sanitizeItems()
+  for k,v in ipairs(self.stock) do
+    self.stock[k].listing_id = self:generateListingId()
     assert(v.name, 'Item must have a name')
     assert(v.price, 'Item must have a price')
     assert(v.category, 'Item must have a category')
@@ -31,71 +36,70 @@ function Shop:sanitizeItems()
   return true
 end
 
-function Shop:__init()
-  assert(self.name, 'Shop must have a name')
-  assert(self.description, 'Shop must have a description')
-  assert(self.icon, 'Shop must have an icon')
-  assert(self.paymentMethods, 'Shop must have payment methods')
+function Store:__init()
+  assert(self.name, 'Store must have a name')
+  assert(self.description, 'Store must have a description')
+  assert(self.icon, 'Store must have an icon')
+  assert(self.paymentMethods, 'Store must have payment methods')
   for k,v in pairs(self.paymentMethods) do
-    assert(Config.paymentMethods[v], 'Payment method does not exist in Config.paymentMethods')
+    assert(paymentMethods[v], ('Payment %s method does not exist in settings/paymentMethods'):format(v))
   end
 
-  assert(self.categories and type(self.categories) == 'table', 'Shop categories must exist and be an array of categories')
+  assert(self.categories and type(self.categories) == 'table', 'Store categories must exist and be an array of categories')
   for k,v in pairs(self.categories) do
     assert(v.name, 'Category must have a name')
     assert(v.icon, 'Category must have an icon')
     assert(v.description, 'Category must have a description')
   end
 
-  assert(self.stock and type(self.stock) == 'table', 'Shop items must exist and be an array of items')
-  local passed_items = self:santizeItems()
+  assert(self.stock and type(self.stock) == 'table', 'Store items must exist and be an array of items')
+  local passed_items = self:sanitizeItems()
   if not passed_items then return false end
 
   return true 
 end
 
-Shop.register = function(id, data)
-  local self = setmetatable(data, Shop)
+Store.register = function(id, data)
+  local self = setmetatable(data, Store)
   self.id = id
   self.resource = GetInvokingResource() or GetCurrentResourceName()
+  self.usingStore = {}
   if self:__init() then 
-    Shops[id] = self
+    Stores[id] = self
     return self
   else 
     return nil
   end
 end
 
-exports('registerShop', Shop.register)
+exports('registerStore', Store.register)
 
-Shop.destroy = function(id)
-  local shop = Shops[id]
-  if not shop then return end
-  Shops[id] = nil
+Store.destroy = function(id)
+  local store = Stores[id]
+  if not store then return end
+  Stores[id] = nil
 end
 
-exports('destroyShop', Shop.destroy)
+exports('destroyStore', Store.destroy)
 
-Shop.get = function(id)
-  return Shops[id]
+Store.get = function(id)
+  return Stores[id]
 end
 
-exports('getShop', Shop.get)
+exports('getStore', Store.get)
 
 AddEventHandler('onResourceStop', function(resource)
-  for k,v in pairs(Shops) do
+  for k,v in pairs(Stores) do
     if v.resource == resource then
-      Shops[k] = nil
+      Stores[k] = nil
     end
   end
 end)
 
 AddEventHandler('playerDropped', function()
   local src = source
-  for k,v in pairs(Shops) do
-    if v.usingStore = src then
-      v.usingStore = nil
-    end
+  for k,v in pairs(Stores) do
+    v.usingStore[src] = nil
   end
 end)
 
@@ -103,9 +107,9 @@ end)
   Server Sided Usage: 
 ]]
 
--- exports['clean_shops']:register('shop_test', {
---   name = 'Shop Test',
---   description = 'This is a test shop',
+-- exports['clean_stores']:register('store_test', {
+--   name = 'Store Test',
+--   description = 'This is a test store',
 --   icon = 'user',
 --   paymentMethods = {'cash', 'bank'},
 
@@ -127,4 +131,4 @@ end)
 --   end,
 -- })
 
--- exports['clean_shops']:openStore()
+-- exports['clean_stores']:openStore()

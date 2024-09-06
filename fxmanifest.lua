@@ -7,18 +7,26 @@ description 'Stores | Clean Pack'
 version      '1.0.14'
 
 shared_script{
-  'src/settings/config.lua',
-  'src/settings/paymentMethods.lua',
-  'src/stores/*.lua',
+  '@clean_lib/init.lua',
+  'src/shared/*.lua',
+  'settings/stores/**/*.lua',
 }
 
 client_script { 
-  'src/client/ui.lua', 
-  'src/client/stores.lua',
+  'src/client/*.lua',
 } 
+
+server_script { 
+  'src/server/class.lua',
+  'src/server/modules/*.lua',
+  'src/server/basic.lua',
+}
  
 ui_page 'web/build/index.html'
+
 files {
-	'web/build/index.html',
+  'settings/*.lua',
+  'settings/**/*.lua',
+  'web/build/index.html',
 	'web/build/**/*',
 }

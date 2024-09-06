@@ -16,18 +16,19 @@ export default function TotalPrice(props: TotalPriceProps) {
       <Flex
         direction='column'
         w='100%'
+        gap='0.25vh'
       >
         <Text
-          size='sm'
+          size='2vh'
           c={colorWithAlpha(theme.colors[theme.primaryColor][9], 0.8)}
           style={{
             fontFamily: 'Akrobat Bold'
           }}
         >Payment</Text>
-        <Text size='xs' c='grey'>Total Price</Text>
+        <Text size='1.5vh' c='grey'>Total Price</Text>
       </Flex>
       <Text
-        size='xl'
+        size='2vh'
         c={colorWithAlpha(theme.colors[theme.primaryColor][9], 0.8)}
         style={{
           fontFamily: 'Akrobat Bold'

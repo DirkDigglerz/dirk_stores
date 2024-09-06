@@ -9,14 +9,15 @@ export default function CartItemInfo(props:CartItemProps){
   return (
     <Flex
       direction='column'
+      gap='0.25vh'
     >
-      <Text size='md'
+      <Text size='1.8vh'
         style={{
           fontFamily: 'Akrobat Bold'
         }}
       >{props.label}</Text>
       <Text
-        size='sm'
+        size='1.5vh'
         c={colorWithAlpha(theme.colors[theme.primaryColor][9], 0.9)}
       >{settings.currency}{props.price}</Text>
     </Flex>

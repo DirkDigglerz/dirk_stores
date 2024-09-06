@@ -1,16 +1,16 @@
 import { Flex, useMantineTheme } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { ItemProps } from "../../types";
-import ShopItemBottomBar from "./ShopItemBottomBar";
-import { ShopItemImage } from "./ShopItemImage";
-import { ShopItemTopBar } from "./ShopItemTopBar";
+import StoreItemBottomBar from "./ShopItemBottomBar";
+import { StoreItemImage } from "./ShopItemImage";
+import { StoreItemTopBar } from "./ShopItemTopBar";
 import { useEffect, useState } from "react";
 import CenterIconWrapper from "./ShopItemWrapper";
 import colorWithAlpha from "../../../utils/colorWithAlpha";
 
 
 
-export default function ShopItem(props: ItemProps & {addToCart: (listing_id: string) => void, existsInCart: boolean}) {
+export default function StoreItem(props: ItemProps & {addToCart: (listing_id: string) => void, existsInCart: boolean}) {
   const theme = useMantineTheme();
   const {hovered, ref} = useHover();
   const [isHovered, setIsHovered] = useState(false);
@@ -66,13 +66,13 @@ export default function ShopItem(props: ItemProps & {addToCart: (listing_id: str
             backdropFilter: 'blur(5px)',
           }}
         >
-          <ShopItemTopBar {...props} hovered={isHovered || props.existsInCart} />
-          <ShopItemImage {...props} />
+          <StoreItemTopBar {...props} hovered={isHovered || props.existsInCart} />
+          <StoreItemImage {...props} />
 
 
         </Flex>
 
-          <ShopItemBottomBar {...props} hovered={isHovered || props.existsInCart} />
+          <StoreItemBottomBar {...props} hovered={isHovered || props.existsInCart} />
 
       </Flex>
     </CenterIconWrapper>

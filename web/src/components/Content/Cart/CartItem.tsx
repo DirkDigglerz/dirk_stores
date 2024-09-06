@@ -8,7 +8,7 @@ import CartItemButtons from "./CartItemButtons";
 export default function CartItem(props: CartItemProps & { addItem: (listing_id: string, amount:number) => void, removeItem: (listing_id: string, amount:number) => void }) {
   const theme = useMantineTheme();
   return (
-    <Box style={{ position: 'relative' }} w="100%">
+    <Box style={{ position: 'relative' }} w="100%" >
       {/* Box for the number */}
   
       <Box
@@ -20,13 +20,13 @@ export default function CartItem(props: CartItemProps & { addItem: (listing_id: 
             color: 'white',
             borderRadius: theme.radius.sm,
             padding: '0.1rem 0.4rem',  
-            fontSize: '0.9rem',
+            fontSize: '1vh',
             fontWeight: 700,
             textAlign: 'center',
             zIndex: 1000, // Ensure it is above other content
           }}
         >
-          <Text size='xs'>{props.amount}</Text>
+          <Text size='1.8vh'>{props.amount}</Text>
         </Box>
       
 
@@ -37,6 +37,7 @@ export default function CartItem(props: CartItemProps & { addItem: (listing_id: 
         p='xs'
         gap='xs'
         align='center'
+        h='10.5vh'
       >
         <Image
           src={props.image}
@@ -47,6 +48,7 @@ export default function CartItem(props: CartItemProps & { addItem: (listing_id: 
           p='0.2rem'
           bg='rgba(77,77,77,0.8)'
           style={{
+            aspectRatio: '1/1',
             backdropFilter: 'blur(5px)',
             borderRadius: theme.radius.xs,
             outline: `1px dashed ${colorWithAlpha(theme.colors[theme.primaryColor][9], 0.8)}`

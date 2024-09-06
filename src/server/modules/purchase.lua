@@ -1,6 +1,8 @@
+local paymentMethods = require 'settings.paymentMethods'
+local metadataGenerators = require 'settings.metadataGenerators'
 
 
-function Shop:attemptPurchase(src, cart, payment_method)
+function Store:attemptPurchase(src, cart, payment_method)
   local totalPrice = 0
   for k,v in pairs(cart) do
     local item = self:getItemByListingId(v.listing_id)
@@ -25,12 +27,12 @@ function Shop:attemptPurchase(src, cart, payment_method)
   end
   
   --## Payment method
-  local paymentMethod = Config.paymentMethods[payment_method]
+  local paymentMethod = paymentMethods[payment_method]
   if not paymentMethod then
     return false, 'invalid_payment_method'
   end
 
-  if not paymentMethod.has_money(src, totalPrice) then
+  if not paymentMethod.remove(src, totalPrice) then
     return false, 'payment_failed_no_money'
   end
 
@@ -42,13 +44,19 @@ function Shop:attemptPurchase(src, cart, payment_method)
     self.onPurchase(src, cart, totalPrice)
   end
 
+  for k,v in pairs(cart) do
+    local metadataGenerator = metadataGenerators[v.name]
+    lib.player.addItem(src, v.name, v.amount, nil, metadataGenerator and metadataGenerator() or nil)
+  end
+
   return true
 end
 
 
-RegisterNetEvent('clean_shops:attemptPurchase', function(shop_id, cart, payment_method)
+lib.callback.register('clean_stores:attemptPurchase', function(src, store_id, cart, payment_method)
+  print('Attempting purchase', src, store_id, json.encode(cart, {indent = true}), payment_method)
   local src = source
-  local shop = Shop.get(shop_id)
-  if not shop then return end
-  shop:attemptPurchase(src, cart, payment_method)
+  local store = Store.get(store_id)
+  if not store then return end
+  return store:attemptPurchase(src, cart, payment_method)
 end)

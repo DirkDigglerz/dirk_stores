@@ -60,7 +60,10 @@ export default function Button(props: ButtonProps) {
       onClick={props.onClick}
     >
       {props.icon && (
-        <FontAwesomeIcon icon={props.icon as IconName || 'fa-play'} style={{ color: hovered && !props.disabled ? colors.iconColor.hovered : colors.iconColor.normal }} size={props.iconSize as SizeProp || 'sm'}/>
+        <FontAwesomeIcon icon={props.icon as IconName || 'fa-play'} style={{ 
+          color: hovered && !props.disabled ? colors.iconColor.hovered : colors.iconColor.normal,
+          fontSize: props.fontSize || '1.8vh',
+        }}/>
       )}
 
       {props.text && (
@@ -68,7 +71,7 @@ export default function Button(props: ButtonProps) {
           style={{
             fontFamily: 'Akrobat Bold',
             color: !props.disabled && hovered ? colors.textColor.hovered : colors.textColor.normal,
-            fontSize: props.fontSize || '0.8rem',
+            fontSize: props.fontSize || '1.8vh',
             marginLeft: props.icon ? '0.5rem' : '0',
           }}
         >{props.text}</Text>

@@ -1,8 +1,8 @@
 import { SimpleGrid } from "@mantine/core";
 import { CartItemProps, ItemProps } from "../../types";
-import ShopItem from "./ShopItem";
+import StoreItem from "./ShopItem";
 
-type ShopContainerProps = {
+type StoreContainerProps = {
   items: ItemProps[];
   setItems: (items: ItemProps[]) => void;
   cart: CartItemProps[];
@@ -10,7 +10,7 @@ type ShopContainerProps = {
   category: string;
 };
 
-export default function ShopContainer(props: ShopContainerProps) {
+export default function StoreContainer(props: StoreContainerProps) {
 
   const addToCart = (listing_id: string) => {
     // add to cart if it exists and if there is enough stock
@@ -48,7 +48,7 @@ export default function ShopContainer(props: ShopContainerProps) {
        {/* // Map over the items and render each one if it matches the category */}
       {props.items.map((item) => {
         if (item.category === props.category) {
-          return <ShopItem key={item.listing_id} {...item} addToCart={addToCart} existsInCart={existsInCart(item.listing_id)} />;
+          return <StoreItem key={item.listing_id} {...item} addToCart={addToCart} existsInCart={existsInCart(item.listing_id)} />;
         }
         return null;
       })}

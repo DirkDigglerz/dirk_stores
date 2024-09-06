@@ -3,26 +3,38 @@ BasicStore.__index = BasicStore
 
 function BasicStore:spawnBlip()
   if not self.blip then return end 
-  lib.blips.register('store'..self.id, {
-    pos     = self.blip.pos,
-    name    = self.blip.label,
+  lib.blip.register('store'..self.id, {
+    pos     = self.ped.pos.xyz or self.blip.pos.xyz or vector3(0,0,0),
+    name    = self.name,
     sprite  = self.blip.sprite,
     display = 4,
     scale   = self.blip.scale,
     color   = self.blip.color,
 
-    canSee = function()
-      return true
-    end
+    canSee = self.openingHours and function()
+      return self:isRightTime()
+    end or nil
   })
 end
 
+
+function BasicStore:isRightTime()
+  if not self.openingHours then return true end
+  local hour = GetClockHours()
+  for k,v in pairs(self.openingHours) do 
+    if hour >= v[1] and hour < v[2] then 
+      return true
+    end
+  end
+  return false
+end
+
 function BasicStore:spawnPed()
-  if self.ped then return end
-  lib.objects.register('store'..self.id, {
+  if not self.ped then return end
+  lib.objects.register('storeClerk:'..self.id, {
     type = 'ped', 
     model = self.ped.model,
-    pos   = self.ped.pos,
+    pos   = vector4(self.ped.pos.x, self.ped.pos.y, self.ped.pos.z - 1.0, self.ped.pos.w),
 
     onSpawn = function(data)
       FreezeEntityPosition(data.entity, true)
@@ -43,7 +55,12 @@ function BasicStore:spawnPed()
           }
         }
       })
-    end
+    end,
+
+
+    canSpawn = self.openingHours and function()
+      return self:isRightTime()
+    end or nil
   })
 end
 
@@ -52,9 +69,9 @@ function BasicStore:__init()
   self:spawnPed()
 end
 
-BasicStore.new = function(data)
+BasicStore.new = function(id, data)
   local self = setmetatable(data, BasicStore)
-  self.id = id
+  self.id = id 
   self.resource = GetInvokingResource() or GetCurrentResourceName()
   if self:__init() then 
     return self
@@ -63,8 +80,9 @@ BasicStore.new = function(data)
 end
 
 
-lib.player.on('playerLoaded', function()
-  for k,v in pairs(Config.stores) do 
-    BasicStore.new(v)
+lib.onCache('playerLoaded', function(data)
+  -- if not data then return end
+  for k,v in pairs(BaseStores) do 
+    BasicStore.new(k, v)
   end 
 end)

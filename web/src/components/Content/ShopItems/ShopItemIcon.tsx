@@ -3,13 +3,13 @@ import colorWithAlpha from "../../../utils/colorWithAlpha";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 
-type ShopItemIconProps = {
+type StoreItemIconProps = {
   icon: string;
   value: number | string;
   hovered: boolean;
 } 
 
-export function ShopItemIcon(props:ShopItemIconProps){
+export function StoreItemIcon(props:StoreItemIconProps){
   const theme = useMantineTheme();
   return (
     <Flex
@@ -18,7 +18,7 @@ export function ShopItemIcon(props:ShopItemIconProps){
         colorWithAlpha(theme.colors[theme.primaryColor][9], 0.3)
       }
       align={'center'}
-      gap='0.15rem'
+      gap='0.25vh'
       p='0.15rem'
 
       style={{
@@ -26,8 +26,12 @@ export function ShopItemIcon(props:ShopItemIconProps){
         borderRadius: theme.radius.xs,
       }}
     >
-      <FontAwesomeIcon icon={props.icon as IconName} size='xs' />
-      <Text size="xs">{props.value}</Text>
+      <FontAwesomeIcon icon={props.icon as IconName} 
+        style={{
+          fontSize: '1.8vh',
+        }}
+      />
+      <Text size="1.8vh">{props.value}</Text>
     </Flex>
   )
 }

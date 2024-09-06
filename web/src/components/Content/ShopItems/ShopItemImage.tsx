@@ -1,7 +1,7 @@
 import { Flex, Image } from "@mantine/core";
 import { ItemProps } from "../../types";
 
-export function ShopItemImage(props: ItemProps) {
+export function StoreItemImage(props: ItemProps) {
   return (
     <Flex
 

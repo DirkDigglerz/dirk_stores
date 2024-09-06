@@ -3,11 +3,11 @@ import { Flex, Text, useMantineTheme } from "@mantine/core";
 import colorWithAlpha from "../../../utils/colorWithAlpha";
 import { ItemProps } from "../../types";
 
-type ShopItemBottomBarProps = {
+type StoreItemBottomBarProps = {
   hovered: boolean;
 } & ItemProps;
 
-function ShopItemBottomBar(props: ShopItemBottomBarProps) {
+function StoreItemBottomBar(props: StoreItemBottomBarProps) {
   const theme = useMantineTheme();
   return ( 
     <Flex
@@ -19,9 +19,10 @@ function ShopItemBottomBar(props: ShopItemBottomBarProps) {
       <Flex
         direction='column'
         p='0.25rem'
+        gap='0.5vh'
       >
-        <Text size='sm'>{props.label}</Text>
-        <Text size='xs' c='grey'
+        <Text size='1.8vh'>{props.label}</Text>
+        <Text size='1.5vh' c='grey'
           style={{
             maxHeight: '2rem',
             overflowY: 'auto',
@@ -33,8 +34,12 @@ function ShopItemBottomBar(props: ShopItemBottomBarProps) {
 
       <FontAwesomeIcon 
         icon='cart-plus' 
-        size='xs' 
+        color={props.hovered? 
+          'rgba(255,255,255,0.9)':
+          'rgba(255,255,255,0.5)'
+        }
         style={{
+          fontSize: '1.8vh',
           marginLeft: 'auto',
           padding: '0.45rem',
           backgroundColor: props.hovered ? 
@@ -50,4 +55,4 @@ function ShopItemBottomBar(props: ShopItemBottomBarProps) {
   )
 }
 
-export default ShopItemBottomBar;
+export default StoreItemBottomBar;

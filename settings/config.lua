@@ -1,2 +1,3 @@
-Config = {}
-Config.stores = {}
+return {
+  currency = '$',
+}

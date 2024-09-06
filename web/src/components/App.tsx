@@ -5,7 +5,7 @@ import "./App.css";
 import { MantineProvider } from '@mantine/core';
 import theme from '../theme';
 import { useSettings } from '../providers/settings/settings';
-import ShopUI from './Main/main';
+import StoreUI from './Main/main';
 
 const App: React.FC = () => {
   const [curTheme, setCurTheme] = useState(theme);
@@ -13,7 +13,6 @@ const App: React.FC = () => {
   // Ensure the theme is updated when the settings change
   useEffect(() => {
     const cloned = { ...curTheme };
-    console.log('new theme' + settings.primaryColor + settings.primaryShade);
     cloned.primaryColor = settings.primaryColor;
     cloned.primaryShade = settings.primaryShade;
     setCurTheme(cloned);
@@ -21,7 +20,7 @@ const App: React.FC = () => {
 
   return (
     <MantineProvider theme={curTheme} defaultColorScheme='dark'>
-      <ShopUI />
+      <StoreUI />
     </MantineProvider>
   );
 };

@@ -44,8 +44,9 @@ export default function CenterIconWrapper(props: CenterIconWrapperProps) {
       >
         {props.icon && (
           <>
-            <FontAwesomeIcon icon={props.icon as IconName || 'fas fa-cart'} size="2x" 
+            <FontAwesomeIcon icon={props.icon as IconName || 'fas fa-cart'} 
               style={{
+                fontSize: '3.5vh',
                 border: `2px solid ${theme.colors[theme.primaryColor][9]}`,
                 backgroundColor: colorWithAlpha(theme.colors[theme.primaryColor][9], 0.5),
                 padding: '0.35rem',
@@ -53,6 +54,7 @@ export default function CenterIconWrapper(props: CenterIconWrapperProps) {
               }}
             />
             <Text
+              size='1.8vh'
               p='0.25rem' 
               ta='center'
               w='75%'

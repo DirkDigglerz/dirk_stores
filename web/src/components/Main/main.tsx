@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNuiEvent } from "../../hooks/useNuiEvent";
 import { internalEvent } from "../../utils/internalEvent";
 import Content from "../Content/Content";
 import { Header } from "../Header/Header";
 import { CartItemProps, CategoryProps, ItemProps } from "../types";
 import Background from "./Background";
+import { fetchNui } from "../../utils/fetchNui";
 
 
 
-export type ShopInfoProps = {
+export type StoreInfoProps = {
   name: string;
   description: string;
   icon: string;
@@ -19,9 +20,9 @@ export type ShopInfoProps = {
   }[];
 }
 
-export default function ShopUI(){
+export default function StoreUI(){
   const [display, setDisplay] = useState(false);
-  const [shopInfo, setShopInfo] = useState<ShopInfoProps>({
+  const [storeInfo, setStoreInfo] = useState<StoreInfoProps>({
     name: 'Test Store',
     description: 'Test Store Desc',
     icon: 'user',
@@ -70,35 +71,46 @@ export default function ShopUI(){
   ]);
 
 
-  useNuiEvent('OPEN_SHOP', (data: {
+  useNuiEvent('OPEN_STORE', (data: {
     categories: CategoryProps[];
     items: ItemProps[];
-    shopInfo: ShopInfoProps;
+    storeInfo: StoreInfoProps;
 
   }) => {
-    setShopInfo(data.shopInfo);
+    setStoreInfo(data.storeInfo);
     setCategories(data.categories);
     setItems(data.items);
     setDisplay(true);
 
   });
 
-  useNuiEvent('CLOSE_SHOP', () => {
+  useNuiEvent('CLOSE_STORE', () => {
     setDisplay(false);
-    setCategories([]);
     setCart([]);
-    setItems([]);
   });
 
+  // escape key to close the store
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        fetchNui('STORE_CLOSED');
+        setDisplay(false);
+      }
+    };
 
+    window.addEventListener('keydown', handleEsc);
 
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
 
 
 
   return (
     <Background display={display}>
-      <Header shopInfo={shopInfo} />
-      <Content categories={categories} items={items} setItems={setItems} cart={cart} setCart={setCart} shopInfo={shopInfo} />
+      <Header storeInfo={storeInfo} />
+      <Content categories={categories} items={items} setItems={setItems} cart={cart} setCart={setCart} storeInfo={storeInfo} />
 
     </Background>
   )
@@ -108,9 +120,9 @@ export default function ShopUI(){
 
 internalEvent([
   {
-    action: 'OPEN_SHOP',
+    action: 'OPEN_STORE',
     data: {
-      shopInfo: {
+      storeInfo: {
         name: 'Test Store',
         description: 'Test Store Desc',
         icon: 'user',
@@ -181,7 +193,7 @@ internalEvent([
 //     {
 //       action: 'OPEN_SHOP',
 //       data: {
-//         shopInfo: {
+//         storeInfo: {
 //           name: 'Test Store 2',
 //           description: 'Test Store Desc 2',
 //           icon: 'user'

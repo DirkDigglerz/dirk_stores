@@ -4,7 +4,7 @@ import Button from "../../Main/Button";
 import { CartItemProps, ItemProps } from "../../types";
 import CartItem from "./CartItem";
 import TotalPrice from "./TotalPrice";
-import { ShopInfoProps } from "../../Main/main";
+import { StoreInfoProps } from "../../Main/main";
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 import { fetchNui } from "../../../utils/fetchNui";
 import { internalEvent } from "../../../utils/internalEvent";
@@ -18,7 +18,7 @@ type CartProps = {
   items: ItemProps[];
   cart: CartItemProps[];
   setCart: (cart: CartItemProps[]) => void;
-  shopInfo: ShopInfoProps;
+  storeInfo: StoreInfoProps;
 };
 
 export default function Cart(props: CartProps) {
@@ -89,7 +89,9 @@ export default function Cart(props: CartProps) {
       direction='column'
       
     >
-      <Text>Shopping Cart</Text>
+      <Text
+        size='2vh'
+      >Shopping Cart</Text>
       <Flex
         direction='column'
         flex={1}
@@ -117,11 +119,20 @@ export default function Cart(props: CartProps) {
         >
 
 
-         {props.shopInfo.paymentMethods.map((method) => (
+      
+         {props.storeInfo.paymentMethods.map((method) => (
             <Button text={method.name} w='100%' icon ={method.icon as IconName} disabled={total === 0} 
               onClick={() => {
-                fetchNui('MAKE_PAYMENT', {method: method.id, cart: props.cart});
-                props.setCart([]);  
+
+                type ReturnData = {
+                  purchased: boolean;
+                  fail_message: string;
+                };
+                fetchNui<ReturnData>('MAKE_PAYMENT', {method: method.id, cart: props.cart}).then(response => {
+                  console.log('payment response', response);
+                  props.setCart([]);  
+                });
+                
               }} 
             />
           ))}

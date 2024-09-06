@@ -26,8 +26,8 @@ function Category(props: CategoryComponentProps) {
       align='center'
       bg={props.selected || hovered ? colorWithAlpha(theme.colors[theme.primaryColor][9], 0.4) : 'rgba(66, 66, 66, 0.5)'}
       w='100%'
-      p='xs'
-      gap='xs'
+      p='sm'
+      gap='sm'
       style={{
         cursor: 'pointer',
         transition: 'all ease-in-out 0.1s',
@@ -37,18 +37,26 @@ function Category(props: CategoryComponentProps) {
       }}
       onClick={() => props.setCategory(props.name)}
     >
-      <FontAwesomeIcon icon={props.icon as IconName} />
+      <FontAwesomeIcon icon={props.icon as IconName} 
+        color = {props.selected || hovered ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.5)'}
+        style={{
+          transition: 'all ease-in-out 0.1s',
+          fontSize: '2vh',
+        }}
+      />
       <Flex
         direction='column'
+        gap='0.25vh'
       >
         <Text
-          size='sm'
+          size='1.8vh'
+          
           style={{
             userSelect: 'none',
             fontFamily: 'Akrobat Bold'
           }}
         >{props.name.toUpperCase()}</Text>
-        <Text size='xs' c='grey'>{props.description}</Text>
+        <Text size='1.6vh' c='grey'>{props.description}</Text>
 
       </Flex>
     

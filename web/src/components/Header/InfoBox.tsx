@@ -26,7 +26,7 @@ export function InfoBox(props: InfoBoxProps) {
         justify='center'
         align='center'
       >
-        <Text c='lightgrey' size='xs'
+        <Text c='lightgrey' size='1.5vh'
           style={{
             fontFamily: 'Akrobat Bold'
           }}>{props.leftSide}</Text>
@@ -39,7 +39,7 @@ export function InfoBox(props: InfoBoxProps) {
         align='center'
         justify='center'
       >
-        <Text c='lightgrey' size='xs'
+        <Text c='lightgrey' size='1.5vh'
           style={{
             fontFamily: 'Akrobat Bold'
           }}
