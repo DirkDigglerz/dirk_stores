@@ -1,6 +1,6 @@
+local config = require 'settings.config'
 local BasicStore = {}
 BasicStore.__index = BasicStore
-
 function BasicStore:spawnBlip()
   if not self.blip then return end 
   lib.blip.register('store'..self.id, {
@@ -40,21 +40,29 @@ function BasicStore:spawnPed()
       FreezeEntityPosition(data.entity, true)
       SetEntityInvincible(data.entity, true)
       SetBlockingOfNonTemporaryEvents(data.entity, true)
-
-
-      lib.target.entity(data.entity, {
-        distance = 1.5,
-        options = {
-          {
-            distance = 1.5,
-            label = 'Open Store',
-            icon  = 'fas fa-store',
-            action = function()
-              openStore(self.id)
-            end
-          }
+      local options = {
+        {
+          distance = 1.5,
+          label = 'Open Store',
+          icon  = 'fas fa-store',
+          action = function()
+            openStore(self.id)
+          end
         }
-      })
+      }
+
+      if config.pedInteract == 'interact' then
+        lib.interact.entity(data.entity, {
+          options = options,
+          distance = 1.5,
+          renderDistance = 5.0,
+        })
+      else 
+        lib.target.entity(data.entity, {
+          distance = 1.5, 
+          options = options,
+        })
+      end 
     end,
 
 

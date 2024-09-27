@@ -13,7 +13,6 @@ function Store:openStore(src)
       icon = paymentMethods[v].icon,
     })
   end
-  print('Opening store', self.name)
   return true, {
     storeInfo = {
       name           = self.name,
