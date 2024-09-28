@@ -89,7 +89,7 @@ end
 
 
 lib.onCache('playerLoaded', function(data)
-  -- if not data then return end
+  if not data then return end
   for k,v in pairs(BaseStores) do 
     BasicStore.new(k, v)
   end 
