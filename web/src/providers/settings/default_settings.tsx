@@ -1,7 +1,7 @@
 import { SettingsProps } from "./settings_props";
 
 export const defaultSettings: SettingsProps = {
-  primaryColor:'blue', 
+  primaryColor:'sanctuary', 
   primaryShade: 9,
   currency: '$',
   item_img_path: 'nui://clean_inventory/web/images',
