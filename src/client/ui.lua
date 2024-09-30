@@ -2,7 +2,8 @@ local cfg = require 'settings.config'
 RegisterNuiCallback('GET_SETTINGS', function(data, cb)
   cb({
     primaryColor  = lib.settings.primaryColor or 'clean', 
-    primaryShade  = lib.settings.primaryShade or 9, 
+    primaryShade  = lib.settings.primaryShade, 
+    customTheme   = lib.settings.customTheme,
     currency      = cfg.currency,
     item_img_path = lib.settings.item_img_path or 'nui://clean_inventory/web/images/',
   })
