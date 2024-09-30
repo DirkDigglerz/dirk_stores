@@ -12,6 +12,7 @@ import { fetchNui } from "../../utils/fetchNui";
 export type StoreInfoProps = {
   name: string;
   description: string;
+  type: 'sell' | 'buy';
   icon: string;
   paymentMethods: {
     id: string;
@@ -26,6 +27,7 @@ export default function StoreUI(){
     name: 'Test Store',
     description: 'Test Store Desc',
     icon: 'user',
+    type: 'sell', // sell or buy
     paymentMethods: [
       {id: 'cash', name: 'Cash', icon: 'money-bill-wave'},
       {id: 'card', name: 'Card', icon: 'credit-card'}

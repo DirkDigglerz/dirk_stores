@@ -1,13 +1,12 @@
+import { IconName } from "@fortawesome/fontawesome-svg-core";
 import { Flex, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { fetchNui } from "../../../utils/fetchNui";
 import Button from "../../Main/Button";
+import { StoreInfoProps } from "../../Main/main";
 import { CartItemProps, ItemProps } from "../../types";
 import CartItem from "./CartItem";
 import TotalPrice from "./TotalPrice";
-import { StoreInfoProps } from "../../Main/main";
-import { IconName } from "@fortawesome/fontawesome-svg-core";
-import { fetchNui } from "../../../utils/fetchNui";
-import { internalEvent } from "../../../utils/internalEvent";
 
 
 
@@ -91,7 +90,10 @@ export default function Cart(props: CartProps) {
     >
       <Text
         size='2vh'
-      >Shopping Cart</Text>
+      >
+        {props.storeInfo.type == 'buy' ? 'Shopping Cart' : 'Items to Sell'}
+
+      </Text>
       <Flex
         direction='column'
         flex={1}
@@ -125,10 +127,10 @@ export default function Cart(props: CartProps) {
               onClick={() => {
 
                 type ReturnData = {
-                  purchased: boolean;
+                  transaction: boolean;
                   fail_message: string;
                 };
-                fetchNui<ReturnData>('MAKE_PAYMENT', {method: method.id, cart: props.cart}).then(response => {
+                fetchNui<ReturnData>('MAKE_TRANSACTION', {method: method.id, cart: props.cart}).then(response => {
                   console.log('payment response', response);
                   props.setCart([]);  
                 });

@@ -36,14 +36,14 @@ local closeStore = function()
   open_store_id = nil
 end
 
-RegisterNuiCallback('MAKE_PAYMENT', function(data, cb)
-  print('Making payment', json.encode(data, {indent = true}))
-  local purchased, fail_reason = lib.callback.await('clean_stores:attemptPurchase', open_store_id, data.cart, data.method)
+RegisterNuiCallback('MAKE_TRANSACTION', function(data, cb)
+  print('Making payment/sale', json.encode(data, {indent = true}))
+  local transaction, fail_reason = lib.callback.await('clean_stores:attemptTransaction', open_store_id, data.cart, data.method)
   print('Purchased', purchased, fail_reason)
-  if purchased then 
+  if transaction then 
     closeStore();
   end
-  cb({purchased = purchased, fail_reason = fail_reason})
+  cb({transaction = transaction, fail_reason = fail_reason})
 end)
 
 RegisterNuiCallback('STORE_CLOSED', function(data, cb)
