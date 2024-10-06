@@ -20,7 +20,7 @@ local function getItemLabel(name)
 end
 
 local function getItemImage(name)
-  return string.format('%s%s.png', lib.settings.item_img_path, name)
+  return string.format('%s/%s.png', lib.settings.item_img_path, name)
 end
 
 function Store:sanitizeItems()

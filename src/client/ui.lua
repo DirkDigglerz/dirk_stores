@@ -7,6 +7,7 @@ RegisterNuiCallback('GET_SETTINGS', function(data, cb)
     currency      = cfg.currency,
     item_img_path = lib.settings.item_img_path or 'nui://clean_inventory/web/images/',
   })
+  print('sENT IMAGE PATH', lib.settings.item_img_path)
 end)
 
 openStore = function(store_id)
