@@ -28,7 +28,11 @@ files {
   'settings/*.lua',
   'settings/**/*.lua',
   'web/build/index.html',
-	'web/build/**/*',
+  'web/build/**/*',
+}
+
+dependencies {
+  'clean_lib'	
 }
 
 escrow_ignore {
