@@ -4,7 +4,7 @@ lua54 'yes'
 games { 'rdr3', 'gta5' } 
 author 'DirkScripts' 
 description 'Stores | Clean Pack' 
-version      '1.0.22'
+version      '1.0.24'
 
 shared_script{
   '@clean_lib/init.lua',
@@ -29,7 +29,11 @@ files {
   'settings/**/*.lua',
   'locales/*.*',
   'web/build/index.html',
-	'web/build/**/*',
+  'web/build/**/*',
+}
+
+dependencies {
+  'clean_lib'	
 }
 
 escrow_ignore {
