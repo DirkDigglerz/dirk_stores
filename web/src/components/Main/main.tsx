@@ -6,6 +6,7 @@ import { Header } from "../Header/Header";
 import { CartItemProps, CategoryProps, ItemProps } from "../types";
 import Background from "./Background";
 import { fetchNui } from "../../utils/fetchNui";
+import { notifications, Notifications } from "@mantine/notifications";
 
 
 
@@ -90,6 +91,12 @@ export default function StoreUI(){
     setDisplay(false);
     setCart([]);
   });
+
+  useEffect(() => {
+    if (!display) {
+      notifications.clean();
+    } 
+  }, [display]);
 
   // escape key to close the store
   useEffect(() => {
