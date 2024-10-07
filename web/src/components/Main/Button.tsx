@@ -57,7 +57,7 @@ export default function Button(props: ButtonProps) {
       }}
       align='center'
       justify='center'
-      onClick={props.onClick}
+      onClick={() => !props.disabled && props.onClick && props.onClick()}
     >
       {props.icon && (
         <FontAwesomeIcon icon={props.icon as IconName || 'fa-play'} style={{ 

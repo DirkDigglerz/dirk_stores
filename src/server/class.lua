@@ -20,7 +20,7 @@ local function getItemLabel(name)
 end
 
 local function getItemImage(name)
-  return string.format('%s/%s.png', lib.settings.item_img_path, name)
+  return string.format('%s%s.png', lib.settings.item_img_path, name)
 end
 
 function Store:sanitizeItems()
@@ -122,11 +122,11 @@ end)
 --   },
 
 --   --## Will run before the purchase is made so you could take away items from an inventory return false if theres an issue return true to proceed
---   canPurchase = function(ply, basket, totalPrice)
+--   canExchange = function(ply, basket, totalPrice)
 --     return true
 --   end,
 
---   onPurchase = function(ply, items, totalPrice)
+--   onExchange = function(ply, items, totalPrice)
 --     --## use this hook to make the money go somewhere after purchases e.g logs/directing cash to a person/inventory etc 
 --   end,
 -- })

@@ -128,6 +128,7 @@ internalEvent([
         name: 'Test Store',
         description: 'Test Store Desc',
         icon: 'user',
+        type : 'sell',
         
         paymentMethods: [
           {id: 'cash', name: 'Cash', icon: 'money-bill-wave'},
@@ -159,9 +160,9 @@ internalEvent([
           metadata: [],
           description: 'This is a drivers license I mean you could probably drive with it',
           category: 'Health',
-          disableIcon: 'exclamation-triangle',
-          disableMessage: 'Out of Stock',
-          stock: 10
+          // disableIcon: 'exclamation-triangle',
+          // disableMessage: 'Out of Stock',
+          stock: 1
         },
         {
           listing_id: 'listing_3',

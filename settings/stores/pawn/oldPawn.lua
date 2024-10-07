@@ -1,13 +1,13 @@
 BaseStores = BaseStores or {}
-BaseStores.downtown247 = {
-  type = 'buy', --## 'sell' or 'buy' 
-  name = 'Downtown 24/7',
-  description = 'A convenience store located in the heart of the city.',
-  icon = 'fas fa-store',
+BaseStores.oldPawn = {
+  type = 'sell', --## 'sell' or 'buy' 
+  name = 'FT Pawn Shop',
+  description = 'Sell me your old crusty goods, I will pay as little as I can get away with.',
+  icon = 'fas fa-dollar-sign',
   
   ped = {
     model = 'mp_m_shopkeep_01',
-    pos   = vector4(24.468175888062, -1345.6422119141, 29.497022628784, 278.44668579102),
+    pos   = vector4(412.17913818359, 314.90344238281, 103.13270568848, 217.13822937012),
   },
 
   blip = {

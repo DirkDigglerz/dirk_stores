@@ -16,7 +16,7 @@ export default function CenterIconWrapper(props: CenterIconWrapperProps) {
   const theme = useMantineTheme();
   return (
     <Box style={{ position: 'relative', width: '100%', height: 'fit-content', outline: 
-      props.icon || props.inCart ?`1px dashed ${theme.colors[theme.primaryColor][9]}` : props.hovered ? `1px solid ${theme.colors[theme.primaryColor][9]}` 
+      props.icon || props.inCart  ?`1px solid ${theme.colors[theme.primaryColor][9]}` : props.hovered ? `1px solid ${theme.colors[theme.primaryColor][9]}` 
       : 'none'
       
       ,

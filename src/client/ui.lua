@@ -12,11 +12,12 @@ end)
 
 openStore = function(store_id)
   local can_open, ui_data = lib.callback.await('clean_stores:openStore', store_id)
-  print('Can open', can_open, json.encode(ui_data, {indent = true}))
   if not can_open then 
     return lib.print.debug(('Store %s cannot be opened reason: %s'):format(store_id, ui_data))
   end
   open_store_id = store_id
+
+  print('Opening store', json.encode(ui_data, {indent = true}))
  
   SendNUIMessage({
     action = 'OPEN_STORE',
@@ -38,6 +39,7 @@ local closeStore = function()
 end
 
 RegisterNuiCallback('MAKE_TRANSACTION', function(data, cb)
+  
   print('Making payment/sale', json.encode(data, {indent = true}))
   local transaction, fail_reason = lib.callback.await('clean_stores:attemptTransaction', open_store_id, data.cart, data.method)
   print('Purchased', purchased, fail_reason)

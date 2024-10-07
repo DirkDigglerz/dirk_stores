@@ -13,15 +13,48 @@ function Store:openStore(src)
       icon = paymentMethods[v].icon,
     })
   end
+
+  local stock = {}
+  for k,v in ipairs(self.stock) do
+    local default_data = {
+      listing_id = v.listing_id,
+      name       = v.name,
+      price      = v.price,
+      icon       = v.icon,
+      category   = v.category,
+      label      = v.label,
+      image      = v.image,
+      description = v.description,
+      stock      = self.type == 'sell' and (lib.inventory.hasItem(src, v.name) or 0) or v.stock,
+    }
+
+    if self.type == 'sell' then 
+      
+
+      local has_item = lib.inventory.hasItem(src, v.name)
+      if has_item then 
+        default_data.stock = has_item
+      else 
+        default_data.disableIcon = 'fas fa-ban'
+        default_data.disableMessage = 'You do not have this item'
+      end
+
+    end 
+    table.insert(stock, default_data)
+  end
+
+  print(json.encode(stock, {indent = true}))
+
   return true, {
     storeInfo = {
       name           = self.name,
       description    = self.description,
       icon           = self.icon,
+      type           = self.type,
       paymentMethods = thisPaymentMethods,
     },
 
-    items = self.stock,
+    items = stock,
     categories = self.categories,
   }
 end

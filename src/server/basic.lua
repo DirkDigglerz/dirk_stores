@@ -4,13 +4,6 @@ CreateThread(function()
   end 
 end)
 
-
-RegisterCommand('test_lib2', function()
-  lib.inventory.useableItem('itemName', function()
-  
-  end)
-end)
-
 -- exports['clean_stores']:register('store_test', {
 --   name = 'Store Test',
 --   description = 'This is a test store',
@@ -26,11 +19,11 @@ end)
 --   },
 
 --   --## Will run before the purchase is made so you could take away items from an inventory return false if theres an issue return true to proceed
---   canPurchase = function(ply, basket, totalPrice)
+--   canExchange = function(ply, basket, totalPrice)
 --     return true
 --   end,
 
---   onPurchase = function(ply, items, totalPrice)
+--   onExcange = function(ply, items, totalPrice)
 --     --## use this hook to make the money go somewhere after purchases e.g logs/directing cash to a person/inventory etc 
 --   end,
 -- })
