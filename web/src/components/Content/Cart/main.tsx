@@ -138,6 +138,7 @@ export default function Cart(props: CartProps) {
                     notifications.show({
                       title: locale('transaction_failed'),
                       message: locale(response.fail_message),
+                      position: 'bottom-center',
                     })
                   }
 
