@@ -68,7 +68,7 @@ function Store:attemptTransaction(src, cart, payment_method)
       lib.inventory.removeItem(src, item.name, v.amount)
     else 
       local metadataGenerator = metadataGenerators[item.name]
-      lib.inventory.addItem(src, item.name, v.amount, nil, metadataGenerator and metadataGenerator() or nil)
+      lib.inventory.addItem(src, item.name, v.amount, metadataGenerator and metadataGenerator() or nil)
     end
   end
 
