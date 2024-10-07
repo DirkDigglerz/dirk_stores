@@ -1,11 +1,14 @@
 import '@mantine/dates/styles.css';
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import { Notifications } from '@mantine/notifications';
 
 import { MantineProvider } from '@mantine/core';
 import theme from '../theme';
 import { useSettings } from '../providers/settings/settings';
 import StoreUI from './Main/main';
+import '@mantine/notifications/styles.css';
+import { LocalesProvider } from '../providers/locales/locales';
 
 const App: React.FC = () => {
   const [curTheme, setCurTheme] = useState(theme);
@@ -33,7 +36,10 @@ const App: React.FC = () => {
 
   return (
     <MantineProvider theme={curTheme} defaultColorScheme='dark'>
-      <StoreUI />
+      <LocalesProvider>
+          <Notifications />
+          <StoreUI />
+      </LocalesProvider>
     </MantineProvider>
   );
 };

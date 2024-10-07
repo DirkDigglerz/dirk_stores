@@ -7,7 +7,10 @@ RegisterNuiCallback('GET_SETTINGS', function(data, cb)
     currency      = cfg.currency,
     item_img_path = lib.settings.item_img_path or 'nui://clean_inventory/web/images/',
   })
-  print('sENT IMAGE PATH', lib.settings.item_img_path)
+end)
+
+RegisterNuiCallback('GET_LOCALES', function(data, cb)
+  cb(lib.getLocales())
 end)
 
 openStore = function(store_id)
@@ -17,8 +20,6 @@ openStore = function(store_id)
   end
   open_store_id = store_id
 
-  print('Opening store', json.encode(ui_data, {indent = true}))
- 
   SendNUIMessage({
     action = 'OPEN_STORE',
     data   = ui_data
@@ -39,14 +40,12 @@ local closeStore = function()
 end
 
 RegisterNuiCallback('MAKE_TRANSACTION', function(data, cb)
-  
-  print('Making payment/sale', json.encode(data, {indent = true}))
-  local transaction, fail_reason = lib.callback.await('clean_stores:attemptTransaction', open_store_id, data.cart, data.method)
-  print('Purchased', purchased, fail_reason)
+  local transaction, fail_message = lib.callback.await('clean_stores:attemptTransaction', open_store_id, data.cart, data.method)
+  lib.print.info(('Response from transaction: %s, %s'):format(transaction, fail_message))
   if transaction then 
     closeStore();
   end
-  cb({transaction = transaction, fail_reason = fail_reason})
+  cb({transaction = transaction, fail_message = fail_message})
 end)
 
 RegisterNuiCallback('STORE_CLOSED', function(data, cb)

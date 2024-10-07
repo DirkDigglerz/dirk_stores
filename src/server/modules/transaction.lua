@@ -42,7 +42,6 @@ function Store:attemptTransaction(src, cart, payment_method)
     for k,v in pairs(cart) do
       local item = self:getItemByListingId(v.listing_id)
       if not lib.inventory.removeItem(src, item.name, v.amount) then 
-        print('Failed to remove item', src, item.name, v.amount)
         return false, 'remove_item_failed'
       end
     end
@@ -64,20 +63,25 @@ function Store:attemptTransaction(src, cart, payment_method)
   end
 
   for k,v in pairs(cart) do
+    local item = self:getItemByListingId(v.listing_id)
     if self.type == 'sell' then 
-      print('REmoving item', src, v.name, v.amount)
-      lib.inventory.removeItem(src, v.name, v.amount)
+      lib.inventory.removeItem(src, item.name, v.amount)
     else 
-      local metadataGenerator = metadataGenerators[v.name]
-      lib.inventory.addItem(src, v.name, v.amount, nil, metadataGenerator and metadataGenerator() or nil)
+      local metadataGenerator = metadataGenerators[item.name]
+      lib.inventory.addItem(src, item.name, v.amount, nil, metadataGenerator and metadataGenerator() or nil)
     end
   end
+
+  lib.notify(src, {
+    title = locale('transaction_complete'),
+    description = locale('transaction_complete_message'),
+    type = 'success',
+  })
 
   return true
 end
 
 lib.callback.register('clean_stores:attemptTransaction', function(src, store_id, cart, payment_method)
-  print('Attempting purchase', src, store_id, json.encode(cart, {indent = true}), payment_method)
   local src = source
   local store = Store.get(store_id)
   if not store then return end

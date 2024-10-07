@@ -1,6 +1,7 @@
 import { Flex, Text, useMantineTheme } from "@mantine/core";
 import { useSettings } from "../../../providers/settings/settings";
 import colorWithAlpha from "../../../utils/colorWithAlpha";
+import { useLocale } from "../../../providers/locales/locales";
 
 type TotalPriceProps = {
   total: number;
@@ -9,6 +10,7 @@ type TotalPriceProps = {
 export default function TotalPrice(props: TotalPriceProps) {
   const theme = useMantineTheme();
   const settings = useSettings();
+  const locale = useLocale();
   return (
     <Flex
       align={'center'}
@@ -24,8 +26,8 @@ export default function TotalPrice(props: TotalPriceProps) {
           style={{
             fontFamily: 'Akrobat Bold'
           }}
-        >Payment</Text>
-        <Text size='1.5vh' c='grey'>Total Price</Text>
+        >{locale('payment')}</Text>
+        <Text size='1.5vh' c='grey'>{locale('total_price')}</Text>
       </Flex>
       <Text
         size='2vh'

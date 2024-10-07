@@ -15,7 +15,7 @@ export function StoreItemTopBar(props: StoreItemTopBarProps) {
       gap='0.25rem'
     >
       <StoreItemIcon icon='dollar-sign' value={props.price} hovered={props.hovered} />
-      {props.stock && (
+      {props.stock && props.stock > 0 && (
         <StoreItemIcon icon='box' value={props.stock} hovered={props.hovered} />
       )}
     </Flex>

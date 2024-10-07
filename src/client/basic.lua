@@ -43,7 +43,7 @@ function BasicStore:spawnPed()
       local options = {
         {
           distance = 1.5,
-          label = 'Open Store',
+          label = locale('open_store'),
           icon  = 'fas fa-store',
           action = function()
             openStore(self.id)

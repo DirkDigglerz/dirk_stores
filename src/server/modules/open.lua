@@ -32,18 +32,20 @@ function Store:openStore(src)
       
 
       local has_item = lib.inventory.hasItem(src, v.name)
-      if has_item then 
+      if has_item and has_item > 0 then 
         default_data.stock = has_item
       else 
         default_data.disableIcon = 'fas fa-ban'
-        default_data.disableMessage = 'You do not have this item'
+        default_data.disableMessage = locale('dont_have_item')
       end
-
+    else 
+      if v.stock and v.stock <= 0 then 
+        default_data.disableIcon = 'fas fa-ban'
+        default_data.disableMessage = locale('out_of_stock')    
+      end 
     end 
     table.insert(stock, default_data)
   end
-
-  print(json.encode(stock, {indent = true}))
 
   return true, {
     storeInfo = {
@@ -61,7 +63,6 @@ end
 
 
 lib.callback.register('clean_stores:openStore', function(src, store_id)
-  print('Opening store', store_id)
   local store = Store.get(store_id)
   if not store then return false, 'store_not_found' end
   return store:openStore(src)

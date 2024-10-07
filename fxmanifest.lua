@@ -27,11 +27,13 @@ ui_page 'web/build/index.html'
 files {
   'settings/*.lua',
   'settings/**/*.lua',
+  'locales/*.*',
   'web/build/index.html',
 	'web/build/**/*',
 }
 
 escrow_ignore {
+  'locales/*.*',
   'settings/*.lua',
   'settings/**/*.lua',
   'web/build/index.html',

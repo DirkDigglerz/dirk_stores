@@ -7,6 +7,8 @@ import { StoreInfoProps } from "../../Main/main";
 import { CartItemProps, ItemProps } from "../../types";
 import CartItem from "./CartItem";
 import TotalPrice from "./TotalPrice";
+import { notifications } from "@mantine/notifications";
+import { useLocale } from "../../../providers/locales/locales";
 
 
 
@@ -22,7 +24,7 @@ type CartProps = {
 
 export default function Cart(props: CartProps) {
   const [total, setTotal] = useState(0);
-  
+  const locale = useLocale();
   useEffect(() => {
     // calculate the total price of all items in the cart
     let total = 0;
@@ -91,7 +93,7 @@ export default function Cart(props: CartProps) {
       <Text
         size='2vh'
       >
-        {props.storeInfo.type == 'buy' ? 'Shopping Cart' : 'Items to Sell'}
+        {props.storeInfo.type == 'buy' ? locale('shopping_cart'): locale('items_to_sell')}
 
       </Text>
       <Flex
@@ -131,8 +133,17 @@ export default function Cart(props: CartProps) {
                   fail_message: string;
                 };
                 fetchNui<ReturnData>('MAKE_TRANSACTION', {method: method.id, cart: props.cart}).then(response => {
-                  console.log('payment response', response);
-                  props.setCart([]);  
+                  console.log('payment response', response.transaction, response.fail_message);
+                  if (response.fail_message) {
+                    notifications.show({
+                      title: locale('transaction_failed'),
+                      message: locale(response.fail_message),
+                    })
+                  }
+
+                  if (response.transaction) {
+                    props.setCart([]);  
+                  }
                 });
                 
               }} 

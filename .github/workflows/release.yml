@@ -75,6 +75,7 @@ jobs:
           mkdir -p ./temp/clean_stores/web/
           cp ./{README.md,fxmanifest.lua} ./temp/clean_stores
           cp -r ./src ./temp/clean_stores
+          cp -r ./locales ./temp/clean_stores
           cp -r ./settings ./temp/clean_stores
           cp -r ./web/build ./temp/clean_stores/web/
           cd ./temp && zip -r ../clean_stores.zip ./clean_stores

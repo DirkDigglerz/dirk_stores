@@ -1,31 +1,17 @@
 return {
-  ['bank'] = {
-    name = 'Bank',
-    icon = 'user',
-
-    add = function(player, amount)
-      --// Implement your own bank system here
-      return true
-    end,
-
-    remove = function(player, amount)
-      --// Implement your own bank system here
-      
-      return true
-    end
-  },
   ['cash'] = {
     name = 'Cash',
     icon = 'user',
 
     add = function(player, amount)
       --// Implement your own bank system here
-      return true
+      local cash_account = lib.settings.framework == 'qbx_core' or lib.settings.framework == 'qb-core' and 'cash' or 'money'
+      return lib.player.addMoney(player, cash_account, amount)
     end,
 
     remove = function(player, amount)
       --// Implement your own bank system here
-      
+      local cash_account = lib.settings.framework == 'qbx_core' or lib.settings.framework == 'qb-core' and 'cash' or 'money'
       return true
     end
   },
@@ -35,13 +21,12 @@ return {
 
     add = function(player, amount)
       --// Implement your own bank system here
-      return true
+      return lib.player.addMoney(player, 'bank', amount)
     end,
 
     remove = function(player, amount)
       --// Implement your own bank system here
-      
-      return true
+      return lib.player.removeMoney(player, 'bank', amount)
     end
   },
   

@@ -1,6 +1,7 @@
 import { Flex } from "@mantine/core";
 import { StoreName } from "./StoreName";
 import { InfoBox } from "./InfoBox";
+import { useLocale } from "../../providers/locales/locales";
 
 
 export type HeaderProps = {
@@ -13,6 +14,7 @@ export type HeaderProps = {
 };
 
 export function Header(props: HeaderProps) {
+  const locale = useLocale();
   return (
     <Flex
       justify='space-between'
@@ -21,7 +23,7 @@ export function Header(props: HeaderProps) {
       p='xs'
     >
       <StoreName storeName={props.storeInfo.name} storeInfo={props.storeInfo.description} icon={props.storeInfo.icon} />
-      <InfoBox leftSide='ESCAPE' rightSide='CLOSE' />
+      <InfoBox leftSide={locale('ESCAPE')} rightSide={locale('CLOSE')} />
     </Flex>
   );
 }

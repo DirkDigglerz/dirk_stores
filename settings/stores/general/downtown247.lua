@@ -61,6 +61,7 @@ BaseStores.downtown247 = {
       name = 'burger',
       category = 'Food',
       price = 5,
+      stock = 3,
     },
     {
       name = 'chips',
