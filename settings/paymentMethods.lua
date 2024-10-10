@@ -29,5 +29,21 @@ return {
       return lib.player.removeMoney(player, 'bank', amount)
     end
   },
+
+
+  -- ['example_item_as_cash'] = {
+  --   name = 'Card',
+  --   icon = 'user',
+
+  --   add = function(player, amount)
+  --     --// Implement your own bank system here
+  --     return lib.inventory.addItem(player, 'test_item', amount)
+  --   end,
+
+  --   remove = function(player, amount)
+  --     --// Implement your own bank system here
+--     return lib.inventory.removeItem(player, 'test_item', amount)
+  --   end
+  -- },
   
 }

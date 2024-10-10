@@ -29,8 +29,8 @@ function Store:sanitizeItems()
     assert(v.name, 'Item must have a name')
     assert(v.price, 'Item must have a price')
     assert(v.category, 'Item must have a category')
-    self.stock[k].label = v.label or getItemLabel(v.name)
-    self.stock[k].image = v.image or getItemImage(v.name)
+    self.stock[k].label = v.label or lib.inventory.getItemLabel(v.name) or getItemLabel(v.name)
+    self.stock[k].image = v.image or getItemImage(v.name) 
     self.stock[k].description = v.description or ''
   end
   return true

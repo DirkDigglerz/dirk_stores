@@ -47,7 +47,8 @@ function Store:attemptTransaction(src, cart, payment_method)
     end
     paymentMethod.add(src, totalPrice)
   elseif self.type == 'buy' then 
-    if not paymentMethod.remove(src, totalPrice) then
+    local removed, reason = paymentMethod.remove(src, totalPrice)
+    if not removed then
       return false, 'payment_failed_no_money'
     end
   end   
