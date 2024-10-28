@@ -1,11 +1,11 @@
-import { Flex, Image, Box, useMantineTheme, Text } from "@mantine/core";
-import { CartItemProps } from "../../types";
+import { Box, Flex, Image, Text, useMantineTheme } from "@mantine/core";
 import colorWithAlpha from "../../../utils/colorWithAlpha";
-import CartItemInfo from "./CartItemInfo";
+import { CartItemProps } from "../../types";
 import CartItemButtons from "./CartItemButtons";
+import CartItemInfo from "./CartItemInfo";
 
 
-export default function CartItem(props: CartItemProps & { addItem: (listing_id: string, amount:number) => void, removeItem: (listing_id: string, amount:number) => void }) {
+export default function CartItem(props: CartItemProps) {
   const theme = useMantineTheme();
   return (
     <Box style={{ position: 'relative' }} w="100%" >
@@ -18,7 +18,7 @@ export default function CartItem(props: CartItemProps & { addItem: (listing_id: 
             right: '-5px',
             backgroundColor: theme.colors[theme.primaryColor][6],
             color: 'white',
-            borderRadius: theme.radius.sm,
+            borderRadius: '0.2rem',
             padding: '0.1rem 0.4rem',  
             fontSize: '1vh',
             fontWeight: 700,
@@ -38,6 +38,9 @@ export default function CartItem(props: CartItemProps & { addItem: (listing_id: 
         gap='xs'
         align='center'
         h='10.5vh'
+        style={{
+          borderRadius: '0.3em',
+        }}
       >
         <Image
           src={props.image}
@@ -50,12 +53,12 @@ export default function CartItem(props: CartItemProps & { addItem: (listing_id: 
           style={{
             aspectRatio: '1/1',
             backdropFilter: 'blur(5px)',
-            borderRadius: theme.radius.xs,
+            borderRadius: '0.25rem',
             outline: `1px dashed ${colorWithAlpha(theme.colors[theme.primaryColor][9], 0.8)}`
           }}
         />
         <CartItemInfo {...props} />
-        <CartItemButtons {...props} addItem={props.addItem} removeItem={props.removeItem} />
+        <CartItemButtons {...props}/>
       </Flex>
     </Box>
   );

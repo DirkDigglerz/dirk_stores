@@ -15,6 +15,8 @@ const LocalesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) 
     'title': 'Title',
     'subtitle': 'Subtitle',
     'theme_color': 'Theme Color is %s',
+    'AddCategory': 'ADD CATEGORY',
+    'AddCategoryDesc': 'Add a new category to the store',
   });
 
   // Updated locale function to handle string interpolation

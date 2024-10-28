@@ -1,4 +1,4 @@
-import { IconName, SizeProp } from "@fortawesome/fontawesome-svg-core";
+import { IconName } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Flex, Text, useMantineTheme } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
@@ -15,6 +15,7 @@ type ButtonProps = {
   radius?: string;
   onClick?: () => void;
   color?: string;
+  ml?: string;
   hoverColor?: string;
   fontSize?: string;
   iconSize?: string;
@@ -44,12 +45,13 @@ export default function Button(props: ButtonProps) {
   return (
     <Flex
       ref={ref}
+      ml={props.ml || '0'}
       w={props.w || 'fit-content'}
       h={props.h || 'fit-content'}
-      bg={ !props.disabled && hovered ? colorWithAlpha(props.hoverColor || theme.colors[theme.primaryColor][9], 0.4) : 'rgba(66, 66, 66, 0.5)'}
+      bg={ !props.disabled && hovered ? colorWithAlpha(props.hoverColor || theme.colors[theme.primaryColor][9], 0.4) : 'rgba(122, 122, 122, 0.5)'}
      
       style={{
-        borderRadius: props.radius || theme.radius.xs,
+        borderRadius: props.radius || '0.25em',
         cursor: !props.disabled ? 'pointer' : 'not-allowed',
         padding: props.p || '0.5rem',
         outline: !props.disabled && hovered? `0.1rem solid ${colorWithAlpha(props.hoverColor || theme.colors[theme.primaryColor][9], 0.8)}`: "0.25rem solid transparent",

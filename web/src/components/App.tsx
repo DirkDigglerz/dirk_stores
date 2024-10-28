@@ -9,6 +9,7 @@ import { useSettings } from '../providers/settings/settings';
 import StoreUI from './Main/main';
 import '@mantine/notifications/styles.css';
 import { LocalesProvider } from '../providers/locales/locales';
+import { StoreProvider } from '../providers/store/provider';
 
 const App: React.FC = () => {
   const [curTheme, setCurTheme] = useState(theme);
@@ -37,8 +38,10 @@ const App: React.FC = () => {
   return (
     <MantineProvider theme={curTheme} defaultColorScheme='dark'>
       <LocalesProvider>
-          <Notifications />
-          <StoreUI />
+        <StoreProvider>
+            <Notifications />
+            <StoreUI />
+        </StoreProvider>
       </LocalesProvider>
     </MantineProvider>
   );

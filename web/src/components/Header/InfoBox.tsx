@@ -1,26 +1,24 @@
-import { useMantineTheme, Flex, Text } from "@mantine/core";
+import { Flex, Text } from "@mantine/core";
 
 type InfoBoxProps = {
   leftSide: string;
   rightSide: string;
 };
 export function InfoBox(props: InfoBoxProps) {
-  const theme = useMantineTheme();
-
-
   return (
     <Flex
       w='fit-content'
       h='60%'
       style={{
-        borderRadius: theme.radius.xs,
+        borderRadius: '0.25em',
         overflow: 'hidden',
         border: `1px solid rgba(77,77,77,0.6)`
       }}
       align='center'
     >
       <Flex
-        p='xs'
+        h='100%'
+        p='0.8em'
         bg='rgba(77,77,77,0.2)'
         direction='column'
         justify='center'
@@ -33,7 +31,8 @@ export function InfoBox(props: InfoBoxProps) {
       </Flex>
 
       <Flex
-        p='xs'
+         h='100%'
+        p='0.8em'
         bg='rgba(77,77,77,0.5)'
         direction='column'
         align='center'

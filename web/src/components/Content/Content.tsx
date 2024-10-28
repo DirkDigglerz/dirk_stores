@@ -1,35 +1,26 @@
 import { Flex } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { CartItemProps, CategoryProps, ItemProps } from "../types";
+import Cart from "./Cart/main";
 import { Categories } from "./Categories";
 import StoreContainer from "./ShopItems/ShopContainer";
-import Cart from "./Cart/main";
-import { StoreInfoProps } from "../Main/main";
+import { useStore } from "../../providers/store/provider";
 
-type ContentProps = {
-  categories: CategoryProps[];
-  items: ItemProps[];
-  setItems: (items: ItemProps[]) => void;
-  cart: CartItemProps[];
-  setCart: (cart: CartItemProps[]) => void;
-  storeInfo:StoreInfoProps;
-};
-
-export default function Content(props: ContentProps) {
+export default function Content() {
   const [category, setCategory] = useState<string>('Category 1');
-
+  const {categories} = useStore();
   useEffect(() => {
-    setCategory(props.categories[0].name);
-  }, [props.categories]);
+    setCategory(categories[0].name);
+  }, [categories]);
 
   return (
     <Flex
       w='100%'
       flex={1}
+      gap='3em'
     >
-      <Categories category={category} categories={props.categories} setCategory={setCategory} />
-      <StoreContainer items={props.items} setItems={props.setItems} category={category} cart={props.cart} setCart={props.setCart} />
-      <Cart cart={props.cart} setCart={props.setCart} items={props.items} storeInfo={props.storeInfo} />
+      <Categories category={category} setCategory={setCategory} />
+      <StoreContainer category={category} />
+      <Cart />
       
     </Flex>
   )

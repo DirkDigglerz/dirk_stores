@@ -18,12 +18,12 @@ export function StoreItemIcon(props:StoreItemIconProps){
         colorWithAlpha(theme.colors[theme.primaryColor][9], 0.3)
       }
       align={'center'}
-      gap='0.25vh'
-      p='0.15rem'
+      gap='0.2em'
+      p='0.35em'
 
       style={{
         transition: 'all ease-in-out 0.1s',
-        borderRadius: theme.radius.xs,
+        borderRadius: '0.2rem',
       }}
     >
       <FontAwesomeIcon icon={props.icon as IconName} 

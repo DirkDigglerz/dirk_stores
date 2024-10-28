@@ -19,10 +19,10 @@ export type MetadataProps = {
  }
  
  export type CategoryProps = {
-   name: string;
-   icon: string;
-   description: string; 
- }
+  name: string;
+  icon: string;
+  description: string; 
+}
 
  
 export type CartItemProps = {

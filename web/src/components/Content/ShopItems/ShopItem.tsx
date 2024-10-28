@@ -4,46 +4,47 @@ import { ItemProps } from "../../types";
 import StoreItemBottomBar from "./ShopItemBottomBar";
 import { StoreItemImage } from "./ShopItemImage";
 import { StoreItemTopBar } from "./ShopItemTopBar";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CenterIconWrapper from "./ShopItemWrapper";
 import colorWithAlpha from "../../../utils/colorWithAlpha";
+import { useStore } from "../../../providers/store/provider";
 
 
 
-export default function StoreItem(props: ItemProps & {addToCart: (listing_id: string) => void, existsInCart: boolean}) {
+export default function StoreItem(props: ItemProps) {
+  const {funcs, store} = useStore();
   const theme = useMantineTheme();
   const {hovered, ref} = useHover();
   const [isHovered, setIsHovered] = useState(false);
 
+  const inCart = useMemo(() => funcs.existsInCart(props.listing_id), [funcs, props.listing_id]);  
+
 
   // Stop hover if props.disabled
   useEffect(() => {
-    if (props.disableMessage) {
+    if (props.disableMessage || store.canManage) {
       setIsHovered(false);
       return 
     }
     setIsHovered(hovered);
-  }, [hovered])
+  }, [hovered, props.disableMessage, store.canManage]);
 
-  useEffect(() => {
-    console.log("in_cart", props.existsInCart)
-  }, [props.existsInCart])
 
   return (
     <CenterIconWrapper
       icon={props.disableIcon}
       message={props.disableMessage}
       hovered={isHovered}
-      inCart={props.existsInCart}
+      inCart={inCart}
     >
 
       <Flex
         onClick={
-          props.disableMessage ? undefined : !props.existsInCart ? () => props.addToCart(props.listing_id) : undefined
+          props.disableMessage || store.canManage ? undefined : !inCart ? () => funcs.addToCart(props.listing_id) : undefined
         }
         ref={ref}
         flex={1}
-        bg={!props.existsInCart ? 
+        bg={!inCart ? 
           isHovered ? 'rgba(77,77,77,0.6)': 'rgba(77,77,77,0.3)':
           colorWithAlpha(theme.colors[theme.primaryColor][9], 0.25)
         }
@@ -51,9 +52,9 @@ export default function StoreItem(props: ItemProps & {addToCart: (listing_id: st
         h="fit-content" // Set each item to take up 50% of the grid's height
         style={{
           transition: 'all ease-in-out 0.1s',
-          borderRadius: theme.radius.xs,
+          borderRadius: '0.25rem',
           backdropFilter: 'blur(5px)',
-          cursor: 'pointer',
+          cursor: store.canManage || props.disableMessage ? 'default' : 'pointer',
           outline: isHovered ? `2px solid ${theme.colors[theme.primaryColor][9]}` : 'none',
           filter: props.disableMessage && 'blur(3px)' || 'none',
         }}
@@ -66,13 +67,13 @@ export default function StoreItem(props: ItemProps & {addToCart: (listing_id: st
             backdropFilter: 'blur(5px)',
           }}
         >
-          <StoreItemTopBar {...props} hovered={isHovered || props.existsInCart} />
+          <StoreItemTopBar {...props} hovered={isHovered || inCart} />
           <StoreItemImage {...props} />
 
 
         </Flex>
 
-          <StoreItemBottomBar {...props} hovered={isHovered || props.existsInCart} />
+          <StoreItemBottomBar {...props} hovered={isHovered || inCart} />
 
       </Flex>
     </CenterIconWrapper>

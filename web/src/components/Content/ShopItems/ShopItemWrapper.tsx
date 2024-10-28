@@ -21,7 +21,7 @@ export default function CenterIconWrapper(props: CenterIconWrapperProps) {
       
       ,
       transition: 'all ease-in-out 0.1s',
-      borderRadius: theme.radius.xs, overflow: 'hidden'
+      borderRadius: '0.25em', overflow: 'hidden'
     }}>
       {/* Wrapped content */}
       {props.children}
@@ -50,7 +50,7 @@ export default function CenterIconWrapper(props: CenterIconWrapperProps) {
                 border: `2px solid ${theme.colors[theme.primaryColor][9]}`,
                 backgroundColor: colorWithAlpha(theme.colors[theme.primaryColor][9], 0.5),
                 padding: '0.35rem',
-                borderRadius: theme.radius.xs,
+                borderRadius: '0.15em',
               }}
             />
             <Text
@@ -63,7 +63,7 @@ export default function CenterIconWrapper(props: CenterIconWrapperProps) {
             
               style={{
                 border: `2px solid ${theme.colors[theme.primaryColor][9]}`,
-                borderRadius: theme.radius.xs,
+                borderRadius: '0.15em',
                 fontFamily: 'Akrobat Bold',
               }}
             >{props.message}</Text> 

@@ -25,7 +25,7 @@ export function StoreName(props: StoreNameProps) {
           backgroundColor: colorWithAlpha(theme.colors[theme.primaryColor][theme.primaryShade as number], 0.2),
           padding: '0.7vh',
           fontSize: '2.5vh',
-          borderRadius: theme.radius.sm,
+          borderRadius: '0.2em',
           border: `2px solid var(--mantine-primary-color-9)`,
           boxShadow: 'inset 0 0 10px rgba(0,0,0,0.6)',
           aspectRatio: '1/1',

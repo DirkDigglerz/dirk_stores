@@ -1,5 +1,4 @@
 import { Flex, Transition } from '@mantine/core';
-import { useEffect, useState } from 'react';
 
 interface BackgroundProps {
   children: React.ReactNode;

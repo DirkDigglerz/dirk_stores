@@ -12,7 +12,7 @@ export function StoreItemTopBar(props: StoreItemTopBarProps) {
     <Flex
       direction='row-reverse'
       p='xs'
-      gap='0.25rem'
+      gap='0.45em'
     >
       <StoreItemIcon icon='dollar-sign' value={props.price} hovered={props.hovered} />
       {props.stock && props.stock > 0 && (
