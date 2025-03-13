@@ -174,7 +174,7 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   useEffect(() => {
     if (!display) {
-      notifications.clean();
+      notifications.dirk();
     } 
   }, [display]);
 

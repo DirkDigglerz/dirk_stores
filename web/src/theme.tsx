@@ -1,7 +1,7 @@
 import { createTheme, alpha } from "@mantine/core";
 
 const theme = createTheme({
-  primaryColor: "clean",
+  primaryColor: "dirk",
   primaryShade: 7,
   defaultRadius: "sm",
   fontFamily: "Akrobat Regular",
@@ -19,7 +19,7 @@ const theme = createTheme({
       "#000000",
     ],
 
-    clean:[
+    dirk:[
       "#ffffff",
       "#f3fce9",
       "#dbf5bd",

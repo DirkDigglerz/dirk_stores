@@ -107,7 +107,7 @@ end)
   Server Sided Usage: 
 ]]
 
--- exports['clean_stores']:register('store_test', {
+-- exports['dirk_stores']:register('store_test', {
 --   name = 'Store Test',
 --   description = 'This is a test store',
 --   icon = 'user',
@@ -131,4 +131,4 @@ end)
 --   end,
 -- })
 
--- exports['clean_stores']:openStore()
+-- exports['dirk_stores']:openStore()

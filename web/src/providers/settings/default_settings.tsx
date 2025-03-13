@@ -16,7 +16,7 @@ export const defaultSettings: SettingsProps = {
     "#007cb6"
   ],
   currency: '$',
-  item_img_path: 'nui://clean_inventory/web/images',
+  item_img_path: 'nui://dirk_inventory/web/images',
   // Add more default settings here
 };
 

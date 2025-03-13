@@ -3,11 +3,11 @@ fx_version 'cerulean'
 lua54 'yes' 
 games { 'rdr3', 'gta5' } 
 author 'DirkScripts' 
-description 'Stores | Clean Pack' 
+description 'Stores | Dirk Pack' 
 version      '1.0.31'
 
 shared_script{
-  '@clean_lib/init.lua',
+  '@dirk_lib/init.lua',
   'src/shared/*.lua',
   'settings/stores/**/*.lua',
 }
@@ -33,7 +33,7 @@ files {
 }
 
 dependencies {
-  'clean_lib'	
+  'dirk_lib'	
 }
 
 escrow_ignore {
