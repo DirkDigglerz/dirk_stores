@@ -2,7 +2,6 @@ import { IconName } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMantineTheme } from "@mantine/core";
 import colorWithAlpha from "../../utils/colorWithAlpha";
-import TornEdges from "./TornEdge";
 import CustomFlex from "./CustomFlex";
 import { useSettings } from "../../stores/settings";
 
