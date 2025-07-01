@@ -19,7 +19,7 @@ A **free**, simple, and flexible **store system** for **FiveM**, styled natively
   Gives your players a consistent and themed experience without needing to modify all your old shops.
 
 - **Theming**  
-  Change the **color scheme** globally or per store. Don't like green? Pick something that matches your vibe.
+  Change the **color scheme** globally or per store. Don't like green? Pick something that matches your vibe. To set a new global theme for all dirk_scripts see [dirk_lib convars](https://docs.dirkscripts.com/resources/dirk-lib/getting-started#convars)
 
 - **Player Store Management (COMING SOON)**  
   Let players place their own inventory items into a shared shop for resale.

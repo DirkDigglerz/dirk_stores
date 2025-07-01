@@ -9,6 +9,7 @@ import colorWithAlpha from "../../utils/colorWithAlpha";
 import CustomFlex from "../Generic/CustomFlex";
 import { motion } from "framer-motion";
 import { ItemProps, useStore } from "./useStore";
+import GlowImage from "../Generic/GlowImage";
 
 export default function Items() {
   const theme = useMantineTheme();
@@ -98,7 +99,7 @@ export function Item(props:ItemProps & { index: number }) {
         />
       </Flex>
 
-      <Image
+      <GlowImage
         src={props.image}
         alt={props.name}
         // w='100%'
