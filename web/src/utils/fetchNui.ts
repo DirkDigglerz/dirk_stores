@@ -17,6 +17,7 @@ export async function fetchNui<T = unknown>(
   data?: unknown,
   mockData?: T,
 ): Promise<T> {
+  
   const options = {
     method: "post",
     headers: {
@@ -32,7 +33,6 @@ export async function fetchNui<T = unknown>(
     : "nui-frame-app";
 
   const resp = await fetch(`https://${resourceName}/${eventName}`, options);
-
   const respFormatted = await resp.json();
 
   return respFormatted;

@@ -5,21 +5,21 @@ local metadataGenerators = require 'settings.metadataGenerators'
 function Store:attemptTransaction(src, cart, payment_method)
   local totalPrice = 0
   for k,v in pairs(cart) do
-    local item = self:getItemByListingId(v.listing_id)
+    local item = self:getItemByListingId(v.id)
     
     if not item then 
       return false, 'no_item_by_id'
     end
 
-    if item.stock and v.amount > item.stock then
+    if item.stock and v.quantity > item.stock then
       return false, 'not_enough_stock'
     end
 
-    if self.type == 'sell' and not lib.inventory.hasItem(src, item.name, v.amount) then
+    if self.type == 'sell' and not lib.inventory.hasItem(src, item.name, v.quantity) then
       return false, 'not_enough_item'
     end
 
-    totalPrice += item.price * v.amount 
+    totalPrice += item.price * v.quantity 
   end
 
 
@@ -40,8 +40,8 @@ function Store:attemptTransaction(src, cart, payment_method)
     lib.print.info(('Attempting to sell %s items for %s'):format(#cart, totalPrice))
     --## Remove all items and add money
     for k,v in pairs(cart) do
-      local item = self:getItemByListingId(v.listing_id)
-      if not lib.inventory.removeItem(src, item.name, v.amount) then 
+      local item = self:getItemByListingId(v.id)
+      if not lib.inventory.removeItem(src, item.name, v.quantity) then 
         return false, 'remove_item_failed'
       end
     end
@@ -56,20 +56,34 @@ function Store:attemptTransaction(src, cart, payment_method)
 
 
   for k,v in pairs(cart) do
-    self:updateStockByListingId(v.listing_id, -v.amount)
+    self:updateStockByListingId(v.id, -v.quantity)
   end
 
   if self.onTransaction then
-    self.onTransaction(src, cart, totalPrice)
+    local allow, reason = self.onTransaction(src, cart, totalPrice)
+    if not allow then
+      return false, reason
+    end 
   end
 
   for k,v in pairs(cart) do
-    local item = self:getItemByListingId(v.listing_id)
+    local item = self:getItemByListingId(v.id)
     if self.type == 'sell' then 
-      lib.inventory.removeItem(src, item.name, v.amount)
+      lib.inventory.removeItem(src, item.name, v.quantity)
     else 
       local metadataGenerator = metadataGenerators[item.name]
-      lib.inventory.addItem(src, item.name, v.amount, metadataGenerator and metadataGenerator() or nil)
+      if metadataGenerator then 
+        for i= 1, v.quantity do
+          local metadata = metadataGenerator()
+          if not metadata then
+            lib.print.error(('Metadata generator for item %s returned nil'):format(item.name))
+            return false, 'metadata_generation_failed'
+          end
+          lib.inventory.addItem(src, item.name, 1, metadata)
+        end
+      else 
+        lib.inventory.addItem(src, item.name, v.quantity)
+      end 
     end
   end
 

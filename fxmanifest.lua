@@ -2,6 +2,7 @@
 fx_version 'cerulean' 
 lua54 'yes' 
 games { 'rdr3', 'gta5' } 
+rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 author 'DirkScripts' 
 description 'Stores | Dirk Pack' 
 version      '1.0.31'
@@ -12,16 +13,18 @@ shared_script{
   'settings/stores/**/*.lua',
 }
 
-client_script { 
-  'src/client/*.lua',
-} 
-
 server_script { 
   'src/server/class.lua',
   'src/server/modules/*.lua',
-  'src/server/basic.lua',
+  'src/server/init.lua',
 }
- 
+
+client_script { 
+  'src/client/class.lua',
+  'src/client/modules/*.lua',
+  'src/client/init.lua',
+} 
+
 ui_page 'web/build/index.html'
 
 files {

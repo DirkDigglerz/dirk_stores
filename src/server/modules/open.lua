@@ -1,23 +1,38 @@
 local paymentMethods = require 'settings.paymentMethods'
 
+function Store:ensureNearby(src)
+  if not self.locations or #self.locations == 0 then 
+    return true -- No locations defined, so no need to check proximity
+  end
+
+
+  local playerPos = GetEntityCoords(GetPlayerPed(src))
+  local foundNearby = false
+  for _, location in pairs(self.locations) do
+    local distance = #(playerPos - location.xyz)
+    if distance < 5.0 then
+      foundNearby = true
+      break
+    end
+  end
+
+  if not foundNearby then 
+    return false, 'not_near_store'
+  end
+  return true
+end
+
 function Store:openStore(src)
   local canOpen = self.canOpen and self.canOpen(src)
   if not canOpen then return false, 'cannot_open_custom' end
-
-  self.usingStore[src] = true
-  local thisPaymentMethods = {}
-  for k,v in pairs(self.paymentMethods) do
-    table.insert(thisPaymentMethods, {
-      id   = v,
-      name = paymentMethods[v].name,
-      icon = paymentMethods[v].icon,
-    })
+  if not self:ensureNearby(src) then 
+    return false, 'not_near_store'
   end
-
+  self.usingStore[src] = true
   local stock = {}
   for k,v in ipairs(self.stock) do
     local default_data = {
-      listing_id = v.listing_id,
+      id = v.id,
       name       = v.name,
       price      = v.price,
       icon       = v.icon,
@@ -29,8 +44,6 @@ function Store:openStore(src)
     }
 
     if self.type == 'sell' then 
-      
-
       local has_item = lib.inventory.hasItem(src, v.name)
       if has_item and has_item > 0 then 
         default_data.stock = has_item
@@ -47,18 +60,7 @@ function Store:openStore(src)
     table.insert(stock, default_data)
   end
 
-  return true, {
-    storeInfo = {
-      name           = self.name,
-      description    = self.description,
-      icon           = self.icon,
-      type           = self.type,
-      paymentMethods = thisPaymentMethods,
-    },
-
-    items = stock,
-    categories = self.categories,
-  }
+  return true, stock
 end
 
 
@@ -77,3 +79,7 @@ RegisterNetEvent('dirk_stores:closeStore', function(store_id)
   if not store then return end
   store:closedStore(source)
 end)
+
+
+
+

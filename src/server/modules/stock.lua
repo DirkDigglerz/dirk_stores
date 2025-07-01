@@ -10,16 +10,16 @@ exports('updateStock', function(store_id, new_stock)
   store:updateStock(new_stock)
 end)  
 
-function Store:getItemByListingId(listing_id)
+function Store:getItemByListingId(id)
   for k,v in pairs(self.stock) do
-    if v.listing_id == listing_id then
+    if v.id == id then
       return v
     end
   end
 end
 
-function Store:updateStockByListingId(listing_id, amount)
-  local item = self:getItemByListingId(listing_id)
+function Store:updateStockByListingId(id, amount)
+  local item = self:getItemByListingId(id)
   if not item then return end
   if not item.stock then return end
   item.stock = item.stock + amount

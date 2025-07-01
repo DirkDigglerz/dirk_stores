@@ -1,7 +1,12 @@
 return {
-  phone = function()
+  flip_phone = function()
+    local newPhone = exports.dirk_burnerphone:registerPhone({
+      model = 'flip',
+    })
+      
     return {
-      number = 5000,
+      imei  = newPhone.imei,
+      model = 'flip',
     }
   end, 
 }

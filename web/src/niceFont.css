@@ -53,3 +53,16 @@
   src: local('Akrobat Black'), url('./fonts/Akrobat-Black.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'CreditCard';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Credit Card'), url('./fonts/CREDC___.otf') format('otf');
+}
+
+@font-face {
+  font-family: 'Red Dead';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Red Dead'), url('./fonts/RedDead.otf') format('woff');
+}
