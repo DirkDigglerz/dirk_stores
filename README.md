@@ -5,10 +5,6 @@
 A **free**, simple, and flexible **store system** for **FiveM**, styled natively and designed to be themed easily to fit your server’s aesthetic.
 
 ## Features
-
-- **Buy & Sell Stores**  
-  Set up stores that players can either **sell to** or **buy from**, configurable per location.
-
 - **Metadata Generators**  
   Supports adding **unique metadata** to specific items, even if your inventory system doesn’t handle it natively.
 
