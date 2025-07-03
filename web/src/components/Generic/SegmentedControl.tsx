@@ -1,9 +1,11 @@
 "use client";
 
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Flex, FlexProps, Text, useMantineTheme } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
-import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { useMemo, useState } from "react";
 
 
 type SegmentProps = {
@@ -25,7 +27,6 @@ export default function SegmentedControl(props: SegmentedControlProps) {
 
   const handleChange = (newValue: string | string[]) => {
     if (props.onChange) {
-
       props.onChange(newValue);
     }
     setValue(newValue);
@@ -43,6 +44,8 @@ export default function SegmentedControl(props: SegmentedControlProps) {
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.3, delay: index * 0.1, ease: 'easeInOut' }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           <Segment
             key={item.value}
@@ -94,17 +97,53 @@ function Segment(props: SegmentProps & {
       }}
       onClick={props.onClick}
     >
-      <Text
-        w="100%"
-        ta="center"
-        size="xs"
-        fw={600}
-        c="rgba(255,255,255,0.8)"
-      >
-        {props.label.toUpperCase()}
-      </Text>
 
-      <div
+
+
+      <motion.div
+        animate={{
+          color: props.selected ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.8)",
+          scale: props.selected ? 1.05 : 1,
+        }}
+        transition={{
+          duration: 0.2,
+          ease: "easeInOut"
+        }}
+
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: theme.spacing.xs,
+
+        }}
+      >
+        {props.icon && (
+          <FontAwesomeIcon
+            icon={props.icon as IconProp}
+            style={{
+              fontSize:theme.fontSizes.xs,
+              aspectRatio: "1 / 1",
+              color: props.selected ? theme.colors[theme.primaryColor][9] : "rgba(255,255,255,0.8)",
+              transition: "color 0.2s ease, transform 0.2s ease",
+              transform: props.selected ? "scale(1.1)" : "scale(1)",
+            }}
+          />
+        )}
+        <Text
+          w="100%"
+          ta="center"
+          size="xs"
+          fw={600}
+          style={{ color: 'inherit' }}
+        >
+          {props.label.toUpperCase()}
+        </Text>
+
+
+      </motion.div>
+
+      <motion.div
         style={{
           position: "absolute",
           bottom: 0,
@@ -113,11 +152,17 @@ function Segment(props: SegmentProps & {
           height: "0.3vh",
           pointerEvents: "none",
           background: `linear-gradient(to right, transparent, ${theme.colors[theme.primaryColor][9]}, transparent)`,
+        }}
+        animate={{
           opacity: realHover ? 1 : 0.2,
-          transition: "opacity 0.2s ease-in-out",
+          scaleY: props.selected ? 1.5 : 1,
+          height: "0.2vh",
+        }}
+        transition={{
+          duration: 0.25,
+          ease: "easeInOut"
         }}
       />
     </Flex>
   );
 }
-

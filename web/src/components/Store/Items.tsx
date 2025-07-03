@@ -64,7 +64,6 @@ export function Item(props:ItemProps) {
   }, [cart, props.id]);
   
   const itemImagePath = useSettings((data) => data.itemImagePath);
-  console.log(`${itemImagePath}/${props.name}.png`);
 
   return (
     <CustomFlex

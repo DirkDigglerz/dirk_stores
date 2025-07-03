@@ -1,5 +1,5 @@
-import { Flex, Image, ImageProps, Text } from "@mantine/core";
-
+import { Flex, Image, ImageProps } from "@mantine/core";
+import NothingPNG from '../Store/nothing.png';
 type GlowImageProps = ImageProps & {
   alt?: string;
 }
@@ -35,6 +35,7 @@ export default function GlowImage(props: GlowImageProps) {
           
         }}
         src={props.src}
+        fallbackSrc={NothingPNG}
         alt={props.alt || 'Glow Image'}
       />
       <Image
@@ -51,6 +52,7 @@ export default function GlowImage(props: GlowImageProps) {
           
         }}
         src={props.src}
+        fallbackSrc={NothingPNG}
         alt={props.alt || 'Glow Image'}
       />
     </Flex>

@@ -24,6 +24,7 @@ export default function Categories(){
 
   return categories && (
     <SegmentedControl
+      gap='sm'
       value={selectedCategory || categories[0].name}
       items={categories.map((category) => ({
         label: category.name.toUpperCase(),

@@ -90,20 +90,6 @@ const theme = createTheme({
       }
     },
 
-    Notifications:{
-      styles:{
-        notification:{
-          backgroundColor: 'rgba(77, 77, 77, 0.4)',
-          ...(useSettings.getState().game === "rdr3" ? 
-            {
-                WebkitMaskImage: "url(https://raw.githubusercontent.com/Jump-On-Studios/RedM-jo_libs/af7545b6840972aa403287280346bbd1b8c443aa/source-repositories/Menu/public/assets/images/background.png)",
-                WebkitMaskRepeat: "no-repeat",
-                WebkitMaskSize: "100% 100%",
-                WebkitMaskComposite: "source-in",
-            } : {}),
-        }
-      }
-    },
 
     TextInput:{
       styles:{

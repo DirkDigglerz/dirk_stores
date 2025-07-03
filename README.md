@@ -1,40 +1,46 @@
-# ![Store Banner](https://i.imgur.com/RFpVTr0.png)  
-[DOWNLOAD](https://www.github.com/DirkDigglerz/dirk_stores)
+# ![ProdBanner](https://i.imgur.com/cuZ3xIC.png)
+
+# Download
+[![GitHub repo](https://img.shields.io/badge/GitHub-dirk__stores-181717?logo=github)](https://github.com/DirkDigglerz/dirk_stores)
+
 
 ## Description  
 A **free**, simple, and flexible **store system** for **FiveM**, styled natively and designed to be themed easily to fit your server’s aesthetic.
 
 ## Features
+- **Default Stores**
+ Has most if not all of the default stores configured with basic items from major inventories/frameworks but is fully adjustable.
+
+- **Categories**
+Optionally have categories for your stores for easier navigation.
+
 - **Metadata Generators**  
   Supports adding **unique metadata** to specific items, even if your inventory system doesn’t handle it natively.
 
-- **Group-Based Stores**  
-  Limit store access to certain **jobs** or **gangs**, perfect for whitelisted factions or hidden traders.
+- **Group/License Locking**
+Lock the entire store or certain items to different groups or licenses within your city. 
 
-- **License Locking**
-  Lock certain items to differeing licenses if you don't wish for players to access them.
+- **Payment Methods**
+Easily add new payment methods to use in any store via the settings/paymentMethods.lua. Here you can define an add and a remove function to implement any sort of currency you wish.
 
 - **Dynamic Store Creation**  
   Register new stores at **runtime** from the server, giving you complete control over when and where stores appear.
 
-- **ox_inventory Hook (Optional)**  
-  Automatically catch and convert **ox_inventory registered shops** to appear in this system’s UI instead.  
-  Gives your players a consistent and themed experience without needing to modify all your old shops.
-
 - **Theming**  
   Change the **color scheme** globally or per store. Don't like green? Pick something that matches your vibe. To set a new global theme for all dirk_scripts see [dirk_lib convars](https://docs.dirkscripts.com/resources/dirk-lib/getting-started#convars)
 
-- **Player Store Management (COMING SOON)**  
-  Let players place their own inventory items into a shared shop for resale.
-
 ---
+
+## UI
+
+![Screenshot](https://i.imgur.com/Bl3PXhv.png)
+![RedMVariant](https://i.imgur.com/2NwuZie.png)
 
 ## Dynamic Store Registration
 
-Create stores dynamically using a single export. Fully customizable:
-
+Create stores dynamically using a single export. You can also update any store at runtime via exports.
 ```lua
-exports['dirk_stores']:register({
+exports['dirk_stores']:registerStore({
   id   = 'test_store',
   type = 'buy', -- 'sell' or 'buy'
   name = 'Test Store',
@@ -94,6 +100,7 @@ exports['dirk_stores']:register({
 
 ## RedM 
 I styled this to also suit RedM (will detect automatically the game) however I do not have bridging in place for VORP-Core, feel free to add this yourself in a PR or privately.
+
 
 |                                         |                                |
 |-------------------------------------|----------------------------|

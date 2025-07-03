@@ -59,6 +59,8 @@ export default function StoreUI(){
     useStore.setState({ open: false });
   });
 
+  const game = useSettings((data) => data.game);
+
   return (
     <Background 
       open={open}
@@ -69,7 +71,24 @@ export default function StoreUI(){
       p='6vh'
       gap='xs'
     >
-      <Notifications position='bottom-left'/>
+      <Notifications position='bottom-left'
+        styles={{
+          notification:{
+            backgroundColor: 'rgba(77, 77, 77, 0.4)',
+        
+            ...(game === "rdr3" ? 
+              {
+                  WebkitMaskImage: "url(https://raw.githubusercontent.com/Jump-On-Studios/RedM-jo_libs/af7545b6840972aa403287280346bbd1b8c443aa/source-repositories/Menu/public/assets/images/background.png)",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskSize: "100% 100%",
+                  WebkitMaskComposite: "source-in",
+                  paddingRight: '1.5vh',
+                  paddingLeft: '1.5vh',
+              } : {}),
+          },
+
+        }}
+      />
       <Header />
       <Flex
         flex={1}

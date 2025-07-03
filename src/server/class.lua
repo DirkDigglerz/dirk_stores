@@ -111,6 +111,7 @@ function Store:getClientData()
     description = self.description,
     icon = self.icon,
     models = self.models,
+    paymentMethods = self.paymentMethods,
     blip  = self.blip,
     locations = self.locations,
     theme = self.theme,

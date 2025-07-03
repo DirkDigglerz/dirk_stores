@@ -11,7 +11,6 @@ export default function Header() {
   const icon = useStore((state) => state.icon);
   const description = useStore((state) => state.description);
   const selectedMethod = useStore((state) => state.selectedMethod);
-  console.log('selectedMethod', selectedMethod);
   const paymentMethods = useStore((state) => state.paymentMethods);
   return (
     <Flex
@@ -48,6 +47,7 @@ export default function Header() {
 
       >
         <SegmentedControl
+          gap='xxs'
           value={selectedMethod?.id || paymentMethods[0]?.id}
           items={paymentMethods.map((method) => ({
             label: method.name.toUpperCase(),
@@ -55,7 +55,6 @@ export default function Header() {
             icon: method.icon || 'fa-credit-card',
           }))}
           onChange={(value) => {
-            console.log('Selected payment method:', value);
             useStore.setState({
               selectedMethod: paymentMethods.find(method => method.id === value) || paymentMethods[0],
             });

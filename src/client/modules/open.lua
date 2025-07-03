@@ -1,3 +1,4 @@
+local paymentMethods = require 'settings.paymentMethods'
 local openStore = nil
 
 function Store:hasGroup()
@@ -21,6 +22,23 @@ function Store:isRightTime()
          (openHour > closeHour and (hour >= openHour or hour < closeHour))
 end
 
+function Store:sanitizePaymentMethods()
+  local sanitized = {}
+  for _, method in ipairs(self.paymentMethods) do
+    if paymentMethods[method] then
+      table.insert(sanitized, {
+        id     = method,
+        icon   = paymentMethods[method].icon or 'credit-card',
+        symbol = paymentMethods[method].symbol or lib.settings.currency,
+        name   = paymentMethods[method].name,
+      })
+    else
+      lib.print.info(('Payment method %s does not exist in settings/paymentMethods'):format(method))
+    end
+  end
+  self.paymentMethods = sanitized
+end
+
 function Store:openStore()
   if not self:hasGroup() then
     return lib.notify({
@@ -35,9 +53,10 @@ function Store:openStore()
     return lib.print.debug(('Store %s cannot be opened reason: %s'):format(self.id, uiData))
   end
   self.stock = stock
+ 
   local baseTheme = getTheme()
   self.theme = {
-    primaryColor = self.theme?.primaryColor or baseTheme.primaryColor,
+    primaryColor = 'red',
     primaryShade = self.theme?.primaryShade or baseTheme.primaryShade,
     customTheme  = self.theme?.customTheme or baseTheme.customTheme,
   }

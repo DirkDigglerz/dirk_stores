@@ -21,7 +21,20 @@ function Store:ensureNearby(src)
   return true
 end
 
-function Store:openStore(src)
+
+function Store:canAccessStore(src)
+
+  if not self:ensureNearby(src) then 
+    return false, 'NotNearStore'
+  end
+
+  -- if not hasGroup(src, self.groups) then
+  --   return false, 'StoreAccessDeniedGroup'
+  -- end
+
+  -- if not hasLicense(src, self.licenses) then 
+  --   return false, 'StoreAccessDeniedLicense'
+  -- end 
 
   if self.canOpen then 
     local success, reason = self.canOpen(src)
@@ -30,15 +43,15 @@ function Store:openStore(src)
     end 
   end 
 
-  if not self:ensureNearby(src) then 
-    return false, 'NotNearStore'
+  return true
+end
+
+
+function Store:openStore(src)
+  local canAccess, _error = self:canAccessStore(src)
+  if not canAccess then
+    return false, _error
   end
-
-
-
-  if self.groups then 
-    -- Compare against users groups
-  end 
 
   self.usingStore[src] = true
   local stock = {}
@@ -75,7 +88,6 @@ function Store:openStore(src)
     end 
     table.insert(stock, itemData)
   end
-  print(json.encode(stock, { indent = true }))
   return true, stock
 end
 

@@ -2,6 +2,20 @@ local paymentMethods = require 'settings.paymentMethods'
 local metadataGenerators = require 'settings.metadataGenerators'
 
 
+function Store:canAccessItem(src, item)
+
+
+  if item.groups then 
+
+  end 
+
+  if item.licenses then 
+
+  end 
+
+  return true
+end
+
 function Store:attemptTransaction(src, cart, payment_method)
   local totalPrice = 0
   for k,v in pairs(cart) do
@@ -9,6 +23,10 @@ function Store:attemptTransaction(src, cart, payment_method)
     
     if not item then 
       return false, 'no_item_by_id'
+    end
+
+    if not self:canAccessItem(src, item) then
+      return false, 'item_access_denied'
     end
 
     if item.stock and v.quantity > item.stock then
@@ -100,5 +118,9 @@ lib.callback.register('dirk_stores:attemptTransaction', function(src, store_id, 
   local src = source
   local store = Store.get(store_id)
   if not store then return end
+  if not self:canAccess(src) then
+    lib.print.error(('Player %s attempted to access store %s without permission'):format(src, store_id))
+    return false, locale('StoreAccessDenied')
+  end
   return store:attemptTransaction(src, cart, payment_method)
 end)

@@ -5,6 +5,7 @@ Store.__index = Store
 
 
 function Store:__init()
+  self:sanitizePaymentMethods()
   self:spawnBlip()
   self:spawnPed()
   return true 

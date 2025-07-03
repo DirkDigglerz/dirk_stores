@@ -5,6 +5,9 @@ import { useSettings } from "../../stores/settings";
 import Button from "../Generic/Button";
 import CustomFlex from "../Generic/CustomFlex";
 import { ItemProps, useStore } from "./useStore";
+import NothingPNG from './nothing.png'
+import { motion, AnimatePresence } from "framer-motion";
+
 
 export default function Checkout() {
   const game = useSettings((data) => data.game);
@@ -38,18 +41,53 @@ export default function Checkout() {
           fontFamily: game === 'fivem' ? 'Akrobat Black' : 'Red Dead',
         }}
       >{locale(type == 'buy' ? 'Checkout' : 'Items to Sell')}</Text>
+
+
       <Flex
         direction={'column'}
         gap='sm'
+        // mah='75vh'
+        mih='60vh'
+        mah='60vh'
+        pr='xxs'
+        style={{
+          overflowY: 'auto',
+        }}
       >
-        {cart.map((item) => (
-          <CheckoutItem
-            key={item.id}
-            {...item}
-          />
-        ))}
+        <AnimatePresence mode="popLayout">
+          {cart.map((item) => (
+            <motion.div
+              key={item.id}
+              layout
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0, 
+                scale: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30
+                }
+              }}
+              exit={{ 
+                opacity: 0, 
+                x: -100, 
+                scale: 0.95,
+                transition: {
+                  duration: 0.2,
+                  ease: "easeInOut"
+                }
+              }}
+            >
+              <CheckoutItem
+                key={item.id}
+                {...item}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </Flex>
-
       <Flex
         mt='auto'
         align='center'
@@ -73,31 +111,35 @@ export default function Checkout() {
         <Text
           fw={600}
         >
-          {selectedMethod?.symbol} {totalPrice}
+          {selectedMethod?.symbol}{' '}
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={totalPrice} // This triggers re-animation when totalPrice changes
+              initial={{ opacity: 0, y: -10, scale: 0.9 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0, 
+                scale: 1,
+                transition: {
+                  duration: 0.3,
+                  ease: "easeOut"
+                }
+              }}
+              exit={{ 
+                opacity: 0, 
+                y: 10, 
+                scale: 0.9,
+                transition: {
+                  duration: 0.15,
+                  ease: "easeIn"
+                }
+              }}
+            >
+              {totalPrice}
+            </motion.span>
+          </AnimatePresence>
         </Text>
       </Flex>
-      {/* <Flex
-        justify={'space-between'}
-        gap='sm'
-        wrap={'wrap'}
-      >
-        {paymentMethods.map((method) => (
-          <Button
-            key={method.id}
-            selected={selectedMethod?.id === method.id}
-            text={method.name.toUpperCase()}
-            icon={method.icon}
-            style={{
-              fontFamily: game === 'fivem' ? 'Akrobat Bold' : 'Red Dead',
-            }}
-            onClick={() => {
-              useStore.setState({ selectedMethod: method });
-              // checkout(method.id);
-            }}
-            flex={1}
-          />
-        ))}
-      </Flex> */}
       <Button
         w='100%'
         text={type === 'buy' ? locale('Buy').toUpperCase() : locale('Sell').toUpperCase()}
@@ -115,9 +157,10 @@ export default function Checkout() {
 
 function CheckoutItem(props: ItemProps & { quantity: number }) {
   const theme = useMantineTheme();
-  const currency = useSettings((data) => data.currency);
+  const selectedMethod = useStore((data) => data.selectedMethod);
   const addToCart = useStore((state) => state.addToCart);
   const removeFromCart = useStore((state) => state.removeFromCart);
+  const itemImagePath = useSettings((data) => data.itemImagePath);
 
   const game = useSettings((data) => data.game);
   return (
@@ -133,8 +176,10 @@ function CheckoutItem(props: ItemProps & { quantity: number }) {
       }}
     >
       <Image
-        src={props.image}
+        src={`${itemImagePath}/${props.name}.png`}
         alt={props.name}
+        fallbackSrc={NothingPNG}
+        fz='xxs'
         w='5vh'
         h='5vh'
         style={{
@@ -154,7 +199,7 @@ function CheckoutItem(props: ItemProps & { quantity: number }) {
           c='rgba(255, 255, 255, 0.7)'
           size='xs'
           fw={500}
-        >{currency}{props.price * props.quantity}</Text>
+        >{selectedMethod?.symbol}{props.price * props.quantity}</Text>
       </Flex>
 
 
