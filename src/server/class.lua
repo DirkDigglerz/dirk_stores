@@ -20,18 +20,12 @@ local function getItemLabel(name)
   return name:gsub('_', ' '):gsub('(%l)(%w*)', function(a,b) return string.upper(a)..b end)
 end
 
-local function getItemImage(name)
-  return string.format('%s%s.png', lib.settings.itemImgPath, name)
-end
-
 function Store:sanitizeItems()
   for k,v in ipairs(self.stock) do
     self.stock[k].id = self:generateListingId()
     assert(v.name, 'Item must have a name')
     assert(v.price, 'Item must have a price')
-    assert(v.category, 'Item must have a category')
     self.stock[k].label = v.label or lib.inventory.getItemLabel(v.name) or getItemLabel(v.name)
-    self.stock[k].image = v.image or getItemImage(v.name) 
     self.stock[k].description = v.description or ''
   end
   return true
@@ -48,17 +42,18 @@ function Store:__init()
     end 
   end
 
-  assert(self.categories and type(self.categories) == 'table', 'Store categories must exist and be an array of categories')
-  for k,v in pairs(self.categories) do
-    assert(v.name, 'Category must have a name')
-    assert(v.icon, 'Category must have an icon')
-    assert(v.description, 'Category must have a description')
-  end
+  assert(not self.categories or type(self.categories) == 'table', 'Store categories must exist and be an array of categories')
+  if self.categories then 
+    for k,v in pairs(self.categories) do
+      assert(v.name, 'Category must have a name')
+      assert(v.icon, 'Category must have an icon')
+      assert(v.description, 'Category must have a description')
+    end
+  end 
 
   assert(self.stock and type(self.stock) == 'table', 'Store items must exist and be an array of items')
-  local passed_items = self:sanitizeItems()
-  if not passed_items then return false end
-  TriggerClientEvent('dirk_stores:updateStore', -1, self.id, self:getClientData())
+  local passedItems = self:sanitizeItems()
+  if not passedItems then return false end
   return true 
 end
 
@@ -71,6 +66,13 @@ Store.register = function(data)
     return nil
   end
   Stores[self.id] = self
+
+  if self.resource ~= GetCurrentResourceName() then
+    lib.print.info(('Store %s registered from resource %s'):format(self.id, self.resource))
+    TriggerClientEvent('dirk_stores:updateStore', -1, self.id, self:getClientData())
+  end
+
+
   return self 
 end
 
@@ -109,7 +111,9 @@ function Store:getClientData()
     description = self.description,
     icon = self.icon,
     models = self.models,
+    blip  = self.blip,
     locations = self.locations,
+    theme = self.theme,
   }
 end
 

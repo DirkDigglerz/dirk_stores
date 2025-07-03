@@ -29,8 +29,10 @@ export type ItemProps = {
   description: string;
   price: number;
 
-  disableIcon?: boolean; // Optional property to disable the icon
-  disableMessage?: string; // Optional property to disable the message
+  disabled?: {
+    icon: string; // Icon to display when the item is disabled
+    message: string; // Message to display when the item is disabled
+  } // Optional disabled property for items that are out of stock or unavailable
 }
 
 export type UseStoreProps = {
@@ -44,7 +46,7 @@ export type UseStoreProps = {
   icon: string;
   description: string;
   paymentMethods: PaymentMethod[];
-  categories: CategoryProps[];
+  categories?: CategoryProps[];
   stock: ItemProps[];
 
   cart: (ItemProps & {
@@ -57,7 +59,7 @@ export type UseStoreProps = {
 
 export const useStore = create<UseStoreProps>((set) => ({
   open: isEnvBrowser() ? true : false, // Default to true in browser environment
-  type: 'buy', // Default store type
+  type: 'sell', // Default store type
   name: 'Black Market',
   icon: 'fa-store',
   description: 'A hidden store for illegal items and services.',
@@ -79,7 +81,7 @@ export const useStore = create<UseStoreProps>((set) => ({
       id: 'crypto',
       name: 'Crypto',
       symbol: '₿',
-      icon: 'fa-bitcoin',
+      icon: 'fa-credit-card',
     },
   ],
 
@@ -120,6 +122,11 @@ export const useStore = create<UseStoreProps>((set) => ({
     {
       id: 'pistol_store_id_002',
       name: 'Pistol',
+      stock: 0,
+      disabled: {
+        icon: 'fa-ban',
+        message: 'This item is currently out of stock.',
+      },
       category: 'Weapons',
       label: '9mm Pistol',
       image: 'https://raw.githubusercontent.com/bitc0de/fivem-items-gallery/refs/heads/main/images/illegal/adress_book.png',

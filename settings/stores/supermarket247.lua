@@ -1,19 +1,28 @@
 BaseStores = BaseStores or {}
-BaseStores.downtown247 = {
+BaseStores.supermarket247 = {
   type = 'buy', --## 'sell' or 'buy' 
   name = '24/7 Store',
-  description = 'A convenience store located in the heart of the city.',
+  description = 'For low quality products at incredibly marked up prices, we have you covered!',
   icon = 'fas fa-store',
   
   models = {'mp_m_shopkeep_01'}, --## Ped model to spawn (randomly selected from the list)
   locations = {
-    vector4(24.368474960327, -1345.2724609375, 29.497034072876, 266.45135498047)
+    vector4(24.47, -1346.62, 29.5, 271.66),
+    vector4(-3039.54, 584.38, 7.91, 17.27),
+    vector4(-3244.4020996094, 1000.1966552734, 12.8307056427, 353.50509643555),
+    vector4(1728.07, 6415.63, 35.04, 242.95),
+    vector4(1959.82, 3740.48, 32.34, 301.57),
+    vector4(549.13, 2670.85, 42.16, 99.39),
+    vector4(2677.47, 3279.76, 55.24, 335.08),
+    vector4(2556.66, 380.84, 108.62, 356.67),
+    vector4(372.66, 326.98, 103.57, 253.73),
+vector4(2749.529296875, 3472.4411621094, 55.677677154541, 324.08737182617)
   },
 
   blip = {
     color   = 27,
-    scale   = 0.2,
-    sprite  = 587827268,
+    scale   = 0.8,
+    sprite  = 52,
     display = 2,
   },
 
@@ -62,8 +71,8 @@ BaseStores.downtown247 = {
       stock = 3,
     },
     {
-      name = 'chips',
-      category = 'Snacks',
+      name = 'cola',
+      category = 'Drinks',
       price = 1,
     },
   },

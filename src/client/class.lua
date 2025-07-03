@@ -16,6 +16,7 @@ end
 
 Store.register = function(data)
   local self = setmetatable(data, Store)
+  lib.print.info(('Registering store %s'):format(self.id))
   self.id = data.id
   if not self:__init() then 
     lib.print.error(('Store %s failed to initialize.'):format(self.id))

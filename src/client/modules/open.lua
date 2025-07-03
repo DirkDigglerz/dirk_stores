@@ -35,6 +35,12 @@ function Store:openStore()
     return lib.print.debug(('Store %s cannot be opened reason: %s'):format(self.id, uiData))
   end
   self.stock = stock
+  local baseTheme = getTheme()
+  self.theme = {
+    primaryColor = self.theme?.primaryColor or baseTheme.primaryColor,
+    primaryShade = self.theme?.primaryShade or baseTheme.primaryShade,
+    customTheme  = self.theme?.customTheme or baseTheme.customTheme,
+  }
   openStore = self
   SendNUIMessage({
     action = 'OPEN_STORE',

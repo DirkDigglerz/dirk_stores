@@ -8,12 +8,19 @@ import Header from "./Header";
 import Items from "./Items";
 import { useStore, UseStoreProps } from "./useStore";
 import { notifications, Notifications } from "@mantine/notifications";
+import { SettingsProps, useSettings } from "../../stores/settings";
 
 
 export default function StoreUI(){  
   const open = useStore((state) => state.open);
 
-  useNuiEvent<Partial<UseStoreProps>>('OPEN_STORE', (data) => {
+  useNuiEvent<Partial<UseStoreProps> & {
+    theme: {
+      primaryColor: SettingsProps['primaryColor'];
+      primaryShade: SettingsProps['primaryShade'];
+      customTheme: SettingsProps['customTheme'];
+    }
+  }>('OPEN_STORE', (data) => {
     // Reset the store state
 
     // clear any cart items that arent in the new data.stock 
@@ -25,6 +32,13 @@ export default function StoreUI(){
       useStore.setState({ cart: newCart });
     }
 
+    // set in the theme if passed   
+    useSettings.setState({
+      primaryColor: data.theme.primaryColor,
+      primaryShade: data.theme.primaryShade,
+      customTheme: data.theme.customTheme,
+    });
+
     // set to default categoryy if current not set or not in new data.categories
     const selectedCategory = useStore.getState().selectedCategory;
     if (!data.categories || !data.categories.some(category => category.name === selectedCategory)) {
@@ -33,6 +47,7 @@ export default function StoreUI(){
 
     useStore.setState({
       open: true,
+      categories: data.categories,
       ...data,
     });
   });
@@ -52,7 +67,7 @@ export default function StoreUI(){
         fetchNui('CLOSE_STORE');
       }}
       p='6vh'
-      gap='sm'
+      gap='xs'
     >
       <Notifications position='bottom-left'/>
       <Header />
@@ -64,8 +79,15 @@ export default function StoreUI(){
           overflow: 'hidden',
         }}
       >
-        <Categories />
-        <Items />
+        <Flex
+          flex={1}
+          h='fit-content'
+          direction={'column'}
+          gap='xs'
+        >
+          <Categories />
+          <Items />
+        </Flex>
         <Checkout />
       </Flex>
 

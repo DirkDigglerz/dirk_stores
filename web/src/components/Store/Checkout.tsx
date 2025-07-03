@@ -35,7 +35,7 @@ export default function Checkout() {
       <Text
         size='md'
         style={{
-          fontFamily: game === 'fivem' ? 'Akrobat Bold' : 'Red Dead',
+          fontFamily: game === 'fivem' ? 'Akrobat Black' : 'Red Dead',
         }}
       >{locale(type == 'buy' ? 'Checkout' : 'Items to Sell')}</Text>
       <Flex
@@ -65,6 +65,7 @@ export default function Checkout() {
           >{locale('Payment')}</Text>
           <Text
             size='sm'
+            c='rgba(255, 255, 255, 0.7)'
           >
             {locale('TotalPrice')}
           </Text>
@@ -75,7 +76,7 @@ export default function Checkout() {
           {selectedMethod?.symbol} {totalPrice}
         </Text>
       </Flex>
-      <Flex
+      {/* <Flex
         justify={'space-between'}
         gap='sm'
         wrap={'wrap'}
@@ -96,7 +97,7 @@ export default function Checkout() {
             flex={1}
           />
         ))}
-      </Flex>
+      </Flex> */}
       <Button
         w='100%'
         text={type === 'buy' ? locale('Buy').toUpperCase() : locale('Sell').toUpperCase()}

@@ -11,6 +11,9 @@ A **free**, simple, and flexible **store system** for **FiveM**, styled natively
 - **Group-Based Stores**  
   Limit store access to certain **jobs** or **gangs**, perfect for whitelisted factions or hidden traders.
 
+- **License Locking**
+  Lock certain items to differeing licenses if you don't wish for players to access them.
+
 - **Dynamic Store Creation**  
   Register new stores at **runtime** from the server, giving you complete control over when and where stores appear.
 
@@ -44,7 +47,6 @@ exports['dirk_stores']:register({
     vector4(25.0, -1346.0, 29.5, 270.0)
   },
 
-  openingHours   = { 0, 24 }, -- 24-hour format or omit for always open
   paymentMethods = {'cash', 'bank'},
 
   categories = {
@@ -55,6 +57,8 @@ exports['dirk_stores']:register({
     },
   },
 
+  -- OPENING CONDITIONS
+  openingHours   = { 0, 24 }, -- 24-hour format or omit for always open
   groups = {
     police = 1,
   },
@@ -65,6 +69,7 @@ exports['dirk_stores']:register({
       label = 'Item 1', 
       price = 100, 
       image = 'https://raw.githubusercontent.com/fazitanvir/items-images/main/license/driver_license.png', 
+      license = 'firearms', -- Optional
       description = 'This is a driver’s license. You could probably drive with it.', 
       category = 'Category 1', 
       stock = 10
@@ -74,6 +79,14 @@ exports['dirk_stores']:register({
   onExchange = function(ply, items, totalPrice)
     -- Use this to log, route money, or trigger server logic
   end,
+
+  theme? = {
+    primaryColor = 'green', -- Mantine colors or "custom" if using customTheme  
+    primaryShade = 9,       -- Primary shade (index in array if custom theme) of your color to use.
+    customTheme  = {
+      -- Array of 9 colors from bright to dark
+    },
+  }
 })
 ```
 ## Dependencies

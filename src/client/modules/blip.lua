@@ -1,5 +1,7 @@
 function Store:spawnBlip()
-  if not self.blip then return end 
+  if not self.blip or not self.blip.sprite then
+    return
+  end
   for _index, location in pairs(self.locations) do 
     lib.blip.register(('Store:%s:%s'):format(self.id, _index), {
       pos     = location.xy or vector3(0,0,0),

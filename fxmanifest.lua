@@ -10,7 +10,7 @@ version      '1.0.32'
 shared_script{
   '@dirk_lib/init.lua',
   'src/shared/*.lua',
-  'settings/stores/**/*.lua',
+  'settings/stores/*.lua',
 }
 
 server_script { 

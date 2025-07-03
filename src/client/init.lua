@@ -1,14 +1,24 @@
 local basic = require 'settings.basic'
-RegisterNuiCallback('GET_SETTINGS', function(data, cb)
-  cb({
-    game             = cache.game, 
+
+getTheme = function()
+  return {
     primaryColor     = lib.settings.primaryColor, 
     primaryShade     = lib.settings.primaryShade,
-    itemImagePath    = lib.settings.itemImagePath,
     customTheme      = lib.settings.customTheme,
+  }
+end
+
+RegisterNuiCallback('GET_SETTINGS', function(data, cb)
+  local settings = {
+    game             = cache.game, 
+    itemImagePath    = lib.settings.itemImagePath,
     background       = basic.background,
     currency         = basic.currency,
-  })
+  }
+  for k,v in pairs(getTheme()) do
+    settings[k] = v
+  end
+  cb(settings)
 end)
 
 RegisterNuiCallback('GET_LOCALES', function(data, cb)
