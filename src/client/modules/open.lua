@@ -37,6 +37,7 @@ function Store:sanitizePaymentMethods()
     end
   end
   self.paymentMethods = sanitized
+
 end
 
 function Store:openStore()
@@ -56,7 +57,7 @@ function Store:openStore()
  
   local baseTheme = getTheme()
   self.theme = {
-    primaryColor = 'red',
+    primaryColor = self.theme?.primaryColor or baseTheme.primaryColor,
     primaryShade = self.theme?.primaryShade or baseTheme.primaryShade,
     customTheme  = self.theme?.customTheme or baseTheme.customTheme,
   }
