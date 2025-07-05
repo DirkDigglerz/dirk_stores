@@ -1,4 +1,4 @@
-# ![ProdBanner](https://i.imgur.com/cuZ3xIC.png)
+# ![ProdBanner](https://dirkscripts-site-git-main-dirkdigglerzs-projects.vercel.app/banners/traphouses.png)
 
 # Download
 [![GitHub repo](https://img.shields.io/badge/GitHub-dirk__stores-181717?logo=github)](https://github.com/DirkDigglerz/dirk_stores)

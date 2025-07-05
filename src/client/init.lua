@@ -10,7 +10,7 @@ end
 
 RegisterNuiCallback('GET_SETTINGS', function(data, cb)
   local settings = {
-    game             = 'rdr3', 
+    game             = cache.game, 
     itemImagePath    = lib.settings.itemImagePath,
     background       = basic.background,
     currency         = basic.currency,
