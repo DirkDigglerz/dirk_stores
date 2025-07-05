@@ -1,4 +1,4 @@
-# ![ProdBanner](https://dirkscripts-site-git-main-dirkdigglerzs-projects.vercel.app/banners/stores.png)
+# ![ProdBanner](https://ugblhpjhhzibwyikrydl.supabase.co/storage/v1/object/public/media//stores.png)
 
 # Download
 [![GitHub repo](https://img.shields.io/badge/GitHub-dirk__stores-181717?logo=github)](https://github.com/DirkDigglerz/dirk_stores)
