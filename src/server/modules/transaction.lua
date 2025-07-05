@@ -118,7 +118,7 @@ lib.callback.register('dirk_stores:attemptTransaction', function(src, store_id, 
   local src = source
   local store = Store.get(store_id)
   if not store then return end
-  if not self:canAccess(src) then
+  if not store:canAccessStore(src) then
     lib.print.error(('Player %s attempted to access store %s without permission'):format(src, store_id))
     return false, locale('StoreAccessDenied')
   end
