@@ -4,8 +4,8 @@ lua54 'yes'
 games { 'rdr3', 'gta5' } 
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 author 'DirkScripts' 
-description 'Stores' 
-version      '1.0.39'
+description 'Stores | Dirk Pack' 
+version      '1.0.40'
 
 shared_script{
   '@dirk_lib/init.lua',
