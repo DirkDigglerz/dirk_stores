@@ -1,4 +1,4 @@
-# ![ProdBanner](https://dirkscripts-site-git-main-dirkdigglerzs-projects.vercel.app/banners/traphouses.png)
+# ![ProdBanner](https://dirkscripts-site-git-main-dirkdigglerzs-projects.vercel.app/banners/stores.png)
 
 # Download
 [![GitHub repo](https://img.shields.io/badge/GitHub-dirk__stores-181717?logo=github)](https://github.com/DirkDigglerz/dirk_stores)
@@ -68,6 +68,8 @@ exports['dirk_stores']:registerStore({
   groups = {
     police = 1,
   },
+  licenses = {},
+  discordRoles = {},
 
   stock = {
     {

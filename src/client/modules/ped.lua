@@ -38,7 +38,8 @@ function Store:spawnPed()
           if basic.interact == 'interact' then
             lib.interact.entity(data.entity, {
               options = options,
-              distance = 1.5,
+              ignoreLos = true,
+              distance = 2.5,
               renderDistance = 5.0,
             })
           else 
