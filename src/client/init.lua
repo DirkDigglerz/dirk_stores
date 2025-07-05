@@ -11,7 +11,7 @@ end
 RegisterNuiCallback('GET_SETTINGS', function(data, cb)
   local settings = {
     game             = cache.game, 
-    itemImagePath    = lib.settings.itemImagePath,
+    itemImgPath      = lib.settings.itemImgPath,
     background       = basic.background,
     currency         = basic.currency,
   }

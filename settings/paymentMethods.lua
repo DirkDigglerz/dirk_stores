@@ -13,8 +13,8 @@ return {
     remove = function(player, amount)
       --// Implement your own bank system here
       local cash_account = (lib.settings.framework == 'qbx_core' or lib.settings.framework == 'qb-core') and 'cash' or 'money'
-
-      return lib.player.removeMoney(player, cash_account, amount)
+      local removed, reason = lib.player.removeMoney(player, cash_account, amount) 
+      return removed, reason
     end
   },
   ['bank'] = {

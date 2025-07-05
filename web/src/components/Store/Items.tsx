@@ -63,8 +63,7 @@ export function Item(props:ItemProps) {
     return cart.some(item => item.id === props.id);
   }, [cart, props.id]);
   
-  const itemImagePath = useSettings((data) => data.itemImagePath);
-
+  const itemImgPath = useSettings((data) => data.itemImgPath);
   return (
     <CustomFlex
       pos='relative'
@@ -145,7 +144,7 @@ export function Item(props:ItemProps) {
         </Flex>
 
         <GlowImage
-          src={`${itemImagePath}/${props.name}.png`}
+          src={`${itemImgPath}${props.name}.png`}
           alt={props.name}
           h='72%'
           p='lg'

@@ -8,7 +8,6 @@
   "out_of_stock": "Out of Stock",
   "DontHaveItem": "DontHaveItem",
   "CLOSE": "CLOSE",
-  "payment_failed_no_money": "You don't have enough money to pay for this item.",
   "total_price": "Total Price",
   "transaction_complete_message": "Thank you for shopping with us!",
   "open_store": "Open Store",

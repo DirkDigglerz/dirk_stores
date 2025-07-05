@@ -10,7 +10,7 @@ export type SettingsProps = {
   primaryShade: MantineColorShade;
   customTheme: MantineColorsTuple;
   background: 'themed' | 'dark' | 'transparent';
-  itemImagePath: string;
+  itemImgPath: string;
   fetchSettings: () => void;
   // Add more settings here
   currency: string; // Currency setting
@@ -33,7 +33,7 @@ export const useSettings = create<SettingsProps>((set) => ({
     "#8b6b16"
   ],
   background: 'themed', // Default background setting
-  itemImagePath: 'nui://dirk_inventory/web/images',
+  itemImgPath: 'nui://dirk_inventory/web/images',
   currency: '$', // Default currency setting
 
   fetchSettings: () => {

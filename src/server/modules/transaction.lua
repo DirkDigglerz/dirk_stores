@@ -60,14 +60,14 @@ function Store:attemptTransaction(src, cart, payment_method)
     for k,v in pairs(cart) do
       local item = self:getItemByListingId(v.id)
       if not lib.inventory.removeItem(src, item.name, v.quantity) then 
-        return false, 'remove_item_failed'
+        return false, 'SellItemFailedNoItem'
       end
     end
     paymentMethod.add(src, totalPrice)
   elseif self.type == 'buy' then 
     local removed, reason = paymentMethod.remove(src, totalPrice)
     if not removed then
-      return false, 'payment_failed_no_money'
+      return false, 'PaymentFailedNoMoney'
     end
   end   
 

@@ -160,7 +160,7 @@ function CheckoutItem(props: ItemProps & { quantity: number }) {
   const selectedMethod = useStore((data) => data.selectedMethod);
   const addToCart = useStore((state) => state.addToCart);
   const removeFromCart = useStore((state) => state.removeFromCart);
-  const itemImagePath = useSettings((data) => data.itemImagePath);
+  const itemImgPath = useSettings((data) => data.itemImgPath);
 
   const game = useSettings((data) => data.game);
   return (
@@ -176,7 +176,7 @@ function CheckoutItem(props: ItemProps & { quantity: number }) {
       }}
     >
       <Image
-        src={`${itemImagePath}/${props.name}.png`}
+        src={`${itemImgPath}${props.name}.png`}
         alt={props.name}
         fallbackSrc={NothingPNG}
         fz='xxs'
