@@ -106,8 +106,8 @@ function Store:attemptTransaction(src, cart, payment_method)
   end
 
   lib.notify(src, {
-    title = locale('transaction_complete'),
-    description = locale('transaction_complete_message'),
+    title = locale('TransactionComplete'),
+    description = locale('TransactionCompleteMessage'),
     type = 'success',
   })
 

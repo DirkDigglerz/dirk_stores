@@ -1,16 +1,9 @@
 {
   "OpenStore": "Open Store",
-  "items_to_sell": "Items to Sell",
-  "payment": "Payment",
-  "dont_have_item": "You don't have this item",
-  "shopping_cart": "Shopping Cart",
-  "transaction_complete": "Transaction Complete",
-  "out_of_stock": "Out of Stock",
+  "Payment": "Payment",
+  "TransactionComplete": "Transaction Complete",
+  "TransactionCompleteMessage": "Thank you for shopping with us!",
   "DontHaveItem": "DontHaveItem",
   "CLOSE": "CLOSE",
-  "total_price": "Total Price",
-  "transaction_complete_message": "Thank you for shopping with us!",
-  "open_store": "Open Store",
-  "ESCAPE": "ESCAPE",
-  "transaction_failed": "Transaction Failed"
+  "ESCAPE": "ESCAPE"
 }

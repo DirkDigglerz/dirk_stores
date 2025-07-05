@@ -84,10 +84,10 @@ end
 
 RegisterNuiCallback('MAKE_TRANSACTION', function(data, cb)
   if not openStore then
-    return cb({success = false, error = 'no_open_store'})
+    return cb({success = false, error = 'NoOpenStore'})
   end
   if not openStore:isRightTime() then
-    return cb({success = false, error = 'store_closed'})
+    return cb({success = false, error = 'StoreClosed'})
   end
   local success, _error = lib.callback.await('dirk_stores:attemptTransaction', openStore.id, data.cart, data.method)
   if success then 
@@ -98,7 +98,7 @@ end)
 
 RegisterNuiCallback('CLOSE_STORE', function(data, cb)
   if not openStore then
-    return cb({success = false, error = 'no_open_store'})
+    return cb({success = false, error = 'NoOpenStore'})
   end
   openStore:closeStore()
   cb({success = true})
