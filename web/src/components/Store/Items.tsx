@@ -26,7 +26,7 @@ export default function Items() {
   return (
     <Flex
       flex={categories ? 0.6 : 1}
-      mah='100%'
+      mah='75vh'
       p='xs'
       pr='sm'
       style={{
