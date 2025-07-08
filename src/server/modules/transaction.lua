@@ -77,8 +77,8 @@ function Store:attemptTransaction(src, cart, payment_method)
     self:updateStockByListingId(v.id, -v.quantity)
   end
 
-  if self.onTransaction then
-    local allow, reason = self.onTransaction(src, cart, totalPrice)
+  if self.onExchange then
+    local allow, reason = self.onExchange(src, cart, totalPrice)
     if not allow then
       return false, reason
     end 
