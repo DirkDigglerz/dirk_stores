@@ -1,4 +1,5 @@
 -- if using qb-core check if qb-shops or qb-pawnshops is running and stop it 
+lib.checkDependency('dirk_lib', '1.2.0', true)
 if lib.settings.framework == 'qb-core' then
   if GetResourceState('qb-shops') == 'started' then
     lib.print.info('Stopping qb-shops as it is not compatible with dirk_stores')
