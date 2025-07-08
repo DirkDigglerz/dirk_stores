@@ -55,7 +55,6 @@ function Store:attemptTransaction(src, cart, payment_method)
   end
 
   if self.type == 'sell' then 
-    lib.print.info(('Attempting to sell %s items for %s'):format(#cart, totalPrice))
     --## Remove all items and add money
     for k,v in pairs(cart) do
       local item = self:getItemByListingId(v.id)
