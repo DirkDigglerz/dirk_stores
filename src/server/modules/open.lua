@@ -30,12 +30,10 @@ function Store:canAccessStore(src)
   end
 
   if not lib.player.hasGroup(src, self.groups) then
-    print('dopesnt haev groiu')
     return false, 'StoreAccessDeniedGroup'
   end
 
   if not lib.player.hasLicense(src, self.licenses) then
-    print('doesnt have license?') 
     return false, 'StoreAccessDeniedLicense'
   end 
 
@@ -53,7 +51,6 @@ end
 function Store:openStore(src)
   local canAccess, _error = self:canAccessStore(src)
   if not canAccess then
-    print(_error)
     return false, _error
   end
 

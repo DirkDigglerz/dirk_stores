@@ -82,7 +82,6 @@ function Store:openStore()
       }
     end 
   end
-  print(json.encode(self.paymentMethods, {indent = true}))
   SendNUIMessage({
     action = 'OPEN_STORE',
     data   = self
