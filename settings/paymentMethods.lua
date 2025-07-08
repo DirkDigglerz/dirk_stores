@@ -32,19 +32,24 @@ return {
       return lib.player.removeMoney(player, 'bank', amount)
     end
   },
-  {
-    name = 'Crypto',
-    icon = 'bitcoin',
-    symbol = '₿',
+  
+  ['black_money'] = {
+    name = 'Black Money',
+    icon = 'skull-crossbones',
+    symbol = '$',
 
     add = function(player, amount)
       --// Implement your own bank system here
-      return lib.player.addMoney(player, 'crypto', amount)
+      local account = lib.settings.framework == 'es_extended' and 'black_money' or 'markedbills'
+      local func = lib.settings.framework == 'es_extended' and 'addMoney' or 'addItem' 
+      return lib.player[func](player, account, amount)
     end,
 
     remove = function(player, amount)
       --// Implement your own bank system here
-      return lib.player.removeMoney(player, 'crypto', amount)
+      local account = lib.settings.framework == 'es_extended' and 'black_money' or 'markedbills'
+      local func = lib.settings.framework == 'es_extended' and 'removeMoney' or 'removeItem' 
+      return lib.player[func](player, account, amount)
     end
   }
 

@@ -1,9 +1,15 @@
 {
-  "OpenStore": "Open Store",
-  "Payment": "Payment",
+  "StoreAccessDeniedLicense": "StoreAccessDeniedLicense",
+  "StoreAccessDenied": "StoreAccessDenied",
   "TransactionComplete": "Transaction Complete",
+  "ESCAPE": "ESCAPE",
+  "StoreAccessDeniedGroup": "StoreAccessDeniedGroup",
   "TransactionCompleteMessage": "Thank you for shopping with us!",
-  "DontHaveItem": "DontHaveItem",
+  "GroupRestricted": "GroupRestricted",
   "CLOSE": "CLOSE",
-  "ESCAPE": "ESCAPE"
+  "LicenseRestricted": "LicenseRestricted",
+  "StoreAccessDeniedDesc": "StoreAccessDeniedDesc",
+  "Payment": "Payment",
+  "DontHaveItem": "DontHaveItem",
+  "OpenStore": "Open Store"
 }

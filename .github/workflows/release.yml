@@ -68,7 +68,7 @@ jobs:
         run: |
           mkdir -p ./temp/dirk_stores
           mkdir -p ./temp/dirk_stores/web/
-          cp ./fxmanifest.lua ./README.md ./temp/dirk_stores
+          cp ./fxmanifest.lua ./README.md ./LICENSE ./CHANGELOG.md ./temp/dirk_stores
           cp -r ./locales ./temp/dirk_stores
           cp -r ./settings ./temp/dirk_stores
           cp -r ./src ./temp/dirk_stores

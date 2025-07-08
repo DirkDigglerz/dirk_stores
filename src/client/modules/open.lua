@@ -1,18 +1,7 @@
 local paymentMethods = require 'settings.paymentMethods'
 local openStore = nil
 
-function Store:hasGroup()
-  if not self.groups then return true end
-  local myJob, myGang = cache.job, cache.gang
-  for k,v in pairs(self.groups) do
-    if k == myJob or k == myGang then
-      if v <= myJob.grade or v <= myGang.grade then
-        return true
-      end
-    end
-  end
-  return false
-end
+
 
 function Store:isRightTime()
   if not self.openingHours then return true end
@@ -41,17 +30,31 @@ function Store:sanitizePaymentMethods()
 end
 
 function Store:openStore()
-  if not self:hasGroup() then
+  if not lib.player.hasGroup(self.groups) then
     return lib.notify({
       title = locale('StoreAccessDenied'),
-      description = locale('StoreAccessDeniedDesc'),
+      description = locale('StoreAccessDeniedGroup'),
       type = 'error',
       duration = 5000,
     })
   end
+
+  if not lib.player.hasLicense(self.licenses) then 
+    return lib.notify({
+      title = locale('StoreAccessDenied'),
+      description = locale('StoreAccessDeniedLicense'),
+      type = 'error',
+    })
+  end 
+  
+
   local canOpen, stock = lib.callback.await('dirk_stores:openStore', self.id)
   if not canOpen then 
-    return lib.print.debug(('Store %s cannot be opened reason: %s'):format(self.id, uiData))
+    return lib.notify({
+      title = locale('StoreAccessDenied'),
+      description = locale(stock),
+      type = 'error',
+    })
   end
   self.stock = stock
  
@@ -62,6 +65,24 @@ function Store:openStore()
     customTheme  = self.theme?.customTheme or baseTheme.customTheme,
   }
   openStore = self
+
+  -- Checking for group/license locked stock to display default disabled message.
+  for k,v in pairs(self.stock) do 
+    if not lib.player.hasGroup(v.groups) then 
+      v.disabled = {
+        icon = 'fa-ban',
+        message = locale('GroupRestricted')
+      }
+    end 
+
+    if not lib.player.hasLicense(v.licenses) then 
+      v.disabled = {
+        icon = 'fa-ban',
+        message = locale('LicenseRestricted')
+      }
+    end 
+  end
+  print(json.encode(self.paymentMethods, {indent = true}))
   SendNUIMessage({
     action = 'OPEN_STORE',
     data   = self

@@ -99,8 +99,8 @@ function Store:attemptTransaction(src, cart, payment_method)
           end
           lib.inventory.addItem(src, item.name, 1, metadata)
         end
-      else 
-        lib.inventory.addItem(src, item.name, v.quantity)
+      else
+        lib.inventory.addItem(src, item.name, v.quantity, item.metadata)
       end 
     end
   end

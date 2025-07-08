@@ -22,19 +22,22 @@ function Store:ensureNearby(src)
 end
 
 
+
 function Store:canAccessStore(src)
 
   if not self:ensureNearby(src) then 
     return false, 'NotNearStore'
   end
 
-  -- if not hasGroup(src, self.groups) then
-  --   return false, 'StoreAccessDeniedGroup'
-  -- end
+  if not lib.player.hasGroup(src, self.groups) then
+    print('dopesnt haev groiu')
+    return false, 'StoreAccessDeniedGroup'
+  end
 
-  -- if not hasLicense(src, self.licenses) then 
-  --   return false, 'StoreAccessDeniedLicense'
-  -- end 
+  if not lib.player.hasLicense(src, self.licenses) then
+    print('doesnt have license?') 
+    return false, 'StoreAccessDeniedLicense'
+  end 
 
   if self.canOpen then 
     local success, reason = self.canOpen(src)
@@ -50,6 +53,7 @@ end
 function Store:openStore(src)
   local canAccess, _error = self:canAccessStore(src)
   if not canAccess then
+    print(_error)
     return false, _error
   end
 
@@ -64,7 +68,8 @@ function Store:openStore(src)
       category    = v.category,
       label       = v.label,
       description = v.description,
-      license     = v.license,
+      licenses     = v.licenses,
+      groups      = v.groups,
       stock       = self.type == 'sell' and (lib.inventory.hasItem(src, v.name) or 0) or v.stock,
     }
 

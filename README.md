@@ -63,20 +63,11 @@ exports['dirk_stores']:registerStore({
     },
   },
 
-  -- OPENING CONDITIONS
-  openingHours   = { 0, 24 }, -- 24-hour format or omit for always open
-  groups = {
-    police = 1,
-  },
-  licenses = {},
-  discordRoles = {},
-
   stock = {
     {
       name = 'item_1', 
       label = 'Item 1', 
       price = 100, 
-      image = 'https://raw.githubusercontent.com/fazitanvir/items-images/main/license/driver_license.png', 
       license = 'firearms', -- Optional
       description = 'This is a driver’s license. You could probably drive with it.', 
       category = 'Category 1', 
@@ -94,7 +85,17 @@ exports['dirk_stores']:registerStore({
     customTheme  = {
       -- Array of 9 colors from bright to dark
     },
-  }
+  },
+
+  -- OPENING CONDITIONS
+  openingHours   = { 0, 24 }, -- 24-hour format or omit for always open
+  groups = {
+    police = 1,
+  },
+  licenses = {},
+  discordRoles = {},
+
+
 })
 ```
 ## Dependencies

@@ -30,10 +30,12 @@ BaseStores.ammunation = {
     return true 
   end,
 
+  licenses = 'weapons', --## Could also be {'weapons', 'firearms'},
+
+
   openingHours = { 0, 24 },--## 24 hour format can also be false or non existent
   
-  paymentMethods = { 'cash', 'bank' },
-
+  paymentMethods = { 'cash', 'bank', 'black_money'},
 
   categories = {
     {
@@ -63,6 +65,7 @@ BaseStores.ammunation = {
     {
       name = 'weapon_pistol',
       category = 'Firearms',
+      licenses = 'superLicense',
       price = 1500,
     },
     {

@@ -115,6 +115,8 @@ function Store:getClientData()
     blip  = self.blip,
     locations = self.locations,
     theme = self.theme,
+    licenses = self.licenses, 
+    groups = self.groups, 
   }
 end
 

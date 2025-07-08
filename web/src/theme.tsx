@@ -1,5 +1,4 @@
 import { createTheme } from "@mantine/core";
-import { useSettings } from "./stores/settings";
 
 const theme = createTheme({
   primaryColor: "red",
