@@ -10,6 +10,7 @@ function Store:spawnBlip()
       display = 4,
       scale   = self.blip.scale,
       color   = self.blip.color,
+      shortRange = self.blip.shortRange or true,
   
       canSee = self.openingHours and function()
         return self:isRightTime()

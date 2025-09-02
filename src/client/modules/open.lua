@@ -30,7 +30,7 @@ function Store:sanitizePaymentMethods()
 end
 
 function Store:openStore()
-  if not lib.player.hasGroup(self.groups) then
+  if self.groups and not lib.player.hasGroup(self.groups) then
     return lib.notify({
       title = locale('StoreAccessDenied'),
       description = locale('StoreAccessDeniedGroup'),
@@ -39,7 +39,7 @@ function Store:openStore()
     })
   end
 
-  if not lib.player.hasLicense(self.licenses) then 
+  if self.groups and not lib.player.hasLicense(self.licenses) then 
     return lib.notify({
       title = locale('StoreAccessDenied'),
       description = locale('StoreAccessDeniedLicense'),
@@ -68,20 +68,21 @@ function Store:openStore()
 
   -- Checking for group/license locked stock to display default disabled message.
   for k,v in pairs(self.stock) do 
-    if not lib.player.hasGroup(v.groups) then 
+    if v.groups and not lib.player.hasGroup(v.groups) then 
       v.disabled = {
         icon = 'fa-ban',
         message = locale('GroupRestricted')
       }
     end 
 
-    if not lib.player.hasLicense(v.licenses) then 
+    if v.licenses and not lib.player.hasLicense(v.licenses) then 
       v.disabled = {
         icon = 'fa-ban',
         message = locale('LicenseRestricted')
       }
     end 
   end
+  print('Sending NUI Message')
   SendNUIMessage({
     action = 'OPEN_STORE',
     data   = self

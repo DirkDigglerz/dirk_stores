@@ -11,6 +11,10 @@ function Store:__init()
   return true 
 end
 
+Store.get = function(id)
+  return Stores[id]
+end
+
 Store.getAll = function()
   return Stores
 end
