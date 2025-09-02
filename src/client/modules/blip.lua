@@ -7,7 +7,7 @@ function Store:spawnBlip()
       pos     = location.xy or vector3(0,0,0),
       name    = self.name,
       sprite  = self.blip.sprite,
-      display = 4,
+      display = self.blip.display or 4,
       scale   = self.blip.scale,
       color   = self.blip.color,
       shortRange = self.blip.shortRange or true,
