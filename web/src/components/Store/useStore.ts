@@ -10,6 +10,7 @@ export type PaymentMethod = {
   name: string; // Name of the payment method
   symbol: string; // Symbol representing the payment method
   icon: string; // Icon representing the payment method
+  balance?: number; // Optional balance property to show current balance
 }
 
 export type CategoryProps = {

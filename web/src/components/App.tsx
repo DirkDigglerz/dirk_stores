@@ -1,4 +1,4 @@
-import { BackgroundImage, MantineProvider } from '@mantine/core';
+import { BackgroundImage, Flex, MantineProvider, Text } from '@mantine/core';
 import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
 import React, { useEffect, useState } from "react";
@@ -9,6 +9,20 @@ import theme from '../theme';
 import { isEnvBrowser } from '../utils/misc';
 import "./App.css";
 import StoreUI from './Store/main';
+import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+// motion Flex
+// @ts-expect-error Motion doesn't like Mantine's Flex
+export const MotionFlex = motion(Flex);
+// @ts-expect-error Motion doesnt like
+export const MotionText = motion(Text);
+
+
+export const MotionIcon = motion(FontAwesomeIcon);
+
+// @ts-expect-error Motion doesnt like
+export const MotionImage = motion(Image);
 
 const App: React.FC = () => {
   const [curTheme, setCurTheme] = useState(theme);

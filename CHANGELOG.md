@@ -1,3 +1,10 @@
+# Update 1.1.2 - 18/09/2025
+- Fixed license issues for qbx (spelling error) (update dirk_lib)
+- Added close button instead of just escape key. 
+- Added balance to where you select your paymentMethod 
+- Added new 'get()' function for paymentMethods (already setup for basic accounts)
+- Restored old ammunation config, no more Goop store 
+
 # Update 1.1.1 - 08/07/2025
 - Added group/license/discordRole support for both the entire store or per individual product.
 - Fixed the scrolling issue. [BurningLight127](https://forum.cfx.re/u/BurningLight127)

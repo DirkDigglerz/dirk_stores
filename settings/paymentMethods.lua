@@ -15,7 +15,13 @@ return {
       local cash_account = (lib.settings.framework == 'qbx_core' or lib.settings.framework == 'qb-core') and 'cash' or 'money'
       local removed, reason = lib.player.removeMoney(player, cash_account, amount) 
       return removed, reason
-    end
+    end,
+
+
+    -- Used client side to get currency.
+    get = function()
+      return lib.player.getMoney('cash')
+    end,
   },
   ['bank'] = {
     name = 'Card',
@@ -30,7 +36,12 @@ return {
     remove = function(player, amount)
       --// Implement your own bank system here
       return lib.player.removeMoney(player, 'bank', amount)
-    end
+    end,
+
+    -- Used client side to get currency.
+    get = function()
+      return lib.player.getMoney('bank')
+    end,
   },
   
   ['black_money'] = {
@@ -50,8 +61,17 @@ return {
       local account = lib.settings.framework == 'es_extended' and 'black_money' or 'markedbills'
       local func = lib.settings.framework == 'es_extended' and 'removeMoney' or 'removeItem' 
       return lib.player[func](player, account, amount)
-    end
-  }
+    end,
+
+    -- Used client side to get currency.
+    get = function()
+      local account = lib.settings.framework == 'es_extended' and 'black_money' or 'markedbills'
+      local func = lib.settings.framework == 'es_extended' and 'getMoney' or 'hasItem'
+      local table = lib.settings.framework == 'es_extended' and 'player' or 'inventory'
+      return lib[table][func](account) or 0
+    end,
+  },
+
 
 
   -- ['example_item_as_cash'] = {

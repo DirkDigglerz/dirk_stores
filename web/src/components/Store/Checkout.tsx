@@ -141,12 +141,9 @@ export default function Checkout() {
         </Text>
       </Flex>
       <Button
-        w='100%'
-        text={type === 'buy' ? locale('Buy').toUpperCase() : locale('Sell').toUpperCase()}
+        size='sm'
+        label={type === 'buy' ? locale('Buy').toUpperCase() : locale('Sell').toUpperCase()}
         icon={type === 'buy' ? 'fa-shopping-cart' : 'fa-hand-holding-dollar'}
-        style={{
-          fontFamily: game === 'fivem' ? 'Akrobat Bold' : 'Red Dead',
-        }}
         onClick={() => {
           checkout();
         }}
@@ -240,7 +237,7 @@ function CheckoutItem(props: ItemProps & { quantity: number }) {
         
         />
         <Button
-          hoverColor={theme.colors.red[9]}
+          color='#ff4d4d'
           onClick={() => removeFromCart(props.id, props.quantity)}
           icon='trash'
         />

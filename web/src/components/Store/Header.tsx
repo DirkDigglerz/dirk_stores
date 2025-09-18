@@ -1,10 +1,11 @@
 import { Flex } from "@mantine/core";
-import { Title } from "../Generic/Title";
-import { InfoBox } from "../Generic/InfoBox";
-import { locale } from "../../stores/locales";
-import { useStore } from "./useStore";
 import { motion } from "framer-motion";
+import { locale } from "../../stores/locales";
+import Button from "../Generic/Button";
 import SegmentedControl from "../Generic/SegmentedControl";
+import { Title } from "../Generic/Title";
+import { useStore } from "./useStore";
+import { fetchNui } from "../../utils/fetchNui";
 
 export default function Header() {
   const name = useStore((state) => state.name);
@@ -50,7 +51,7 @@ export default function Header() {
           gap='xxs'
           value={selectedMethod?.id || paymentMethods[0]?.id}
           items={paymentMethods.map((method) => ({
-            label: method.name.toUpperCase(),
+            label: selectedMethod?.id === method.id ? `${method.name} - (${method.symbol}${method.balance})` : method.name,
             value: method.id,
             icon: method.icon || 'fa-credit-card',
           }))}
@@ -67,11 +68,13 @@ export default function Header() {
         animate={{ x: 0, opacity: 1}}
         transition={{ duration: 0.3, delay: 0.2, ease: 'easeInOut' }}
       >
-        <InfoBox
-          leftSide={locale('Close').toUpperCase()}
-          rightSide={locale('Escape').toUpperCase()}
-          />
-  
+        <Button
+          icon='xmark'
+          size='md'
+          onClick={() => {
+            fetchNui('CLOSE_STORE');
+          }}
+        />
       </motion.div>
     </Flex>
   )

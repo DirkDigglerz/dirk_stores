@@ -82,10 +82,17 @@ function Store:openStore()
       }
     end 
   end
-  print('Sending NUI Message')
+
+
+  for _index, method in ipairs(self.paymentMethods) do
+    if paymentMethods[method.id] and paymentMethods[method.id].get then
+      self.paymentMethods[_index].balance = paymentMethods[method.id].get()
+    end
+  end
+
   SendNUIMessage({
     action = 'OPEN_STORE',
-    data   = self
+    data   = self,
   })
   TriggerScreenblurFadeIn(500)
   SetNuiFocus(true, true)

@@ -1,88 +1,121 @@
 BaseStores = BaseStores or {}
 BaseStores.ammunation = {
-  type = 'buy',
-  name = 'Goop Store',
-  description = 'The GOOP STORE',
-  icon = 'fa-solid fa-gun',
-  modelType = 'ped',
-  models = {'a_m_y_hasjew_01'},
-  locations = { 
-    vector4(-42.6, -1831.26, 26.29, 317.84)
+  type = 'buy', --## 'sell' or 'buy' 
+  name = 'Ammunation',
+  description = 'Faulty firearms and overpriced ammunition, what more could you want?',
+  icon = 'fas fa-gun',
+  
+  models = {'mp_m_shopkeep_01'}, --## Ped model to spawn (randomly selected from the list)
+  locations = {
+    vector4(22.470691680908, -1105.3994140625, 29.797008514404, 162.98078918457),  -- NEAR LEGION
+    vector4(810.22869873047, -2159.1435546875, 29.619016647339, 356.72598266602),  -- SOUTH EAST AMMUNATION
+    vector4(841.48986816406, -1035.3930664062, 28.194864273071, 355.58792114258),  -- NEAR MIRROR PARK
+    vector4(-661.33892822266, -933.61248779297, 21.829238891602, 173.55712890625), -- NEAR BEACH AREA
+    vector4(-1304.2788085938, -395.05575561523, 36.695762634277, 79.229972839355), -- NORTH OF BEACH
+    vector4(1692.5540771484, 3761.21484375, 34.705318450928, 228.0951385498),      -- SANDY SHORES
+    vector4(-330.87115478516, 6085.748046875, 31.454778671265, 221.40034484863), -- PALETO BAY
+    vector4(-1118.2666015625, 2700.38671875, 18.554151535034, 219.1848449707), -- SOUTH OF MILITARY BASE
+    vector4(2566.9125976562, 292.54739379883, 108.73485565186, 354.51898193359), -- NORTH EAST OF THE CITY
+    vector4(-3173.2419433594, 1089.140625, 20.838743209839, 249.56518554688), -- NORTH WEST OF THE CITY
   },
 
-  paymentMethods = {'cash', 'bank'},
+  blip = {
+    color   = 0,
+    scale   = 0.8,
+    sprite  = 110,
+    display = 2,
+  },
+
+  canOpen = function() -- ## Optional function to check if the store can be opened (check license etc?) (server side)
+    return true 
+  end,
+
+  -- licenses = 'weapon', --## Could also be {'weapons', 'firearms'},
+
+
+  openingHours = { 0, 24 },--## 24 hour format can also be false or non existent
+  
+  paymentMethods = { 'cash', 'bank'},
 
   categories = {
     {
-      name = 'Class 1', 
-      icon = 'user', 
-      description = 'Class 1 Weapons'
-    },
-    {       
-      name = 'Class 2', 
-      icon = 'user', 
-      description = 'Class 2 Weapons'
-    },
-    {   
-      name = 'Class 3', 
-      icon = 'user', 
-      description = 'Class 3 Weapons'
+      name = 'Melee Weapons',
+      description = 'Close combat weapons',
+      icon = 'fas fa-fist-raised',
     },
     {
-      name = 'Ammo & Armour', 
-      icon = 'user', 
-      description = 'Ammo & Armour'
+      name = 'Firearms',
+      description = 'Rifles, shotguns, and handguns',
+      icon = 'fas fa-bullseye',
+    }, 
+    {
+      name = 'Ammunition',
+      description = 'Bullets and shells.',
+      icon = 'fas fa-bullet',
     },
     {
-      name = 'Attachments & Tints', 
-      icon = 'user', 
-      description = 'Attachments & Tints'
-    },
+      name = 'Accessories',
+      description = 'Scopes, suppressors and more.',
+      icon = 'fas fa-tools',
+    }
   },
 
   stock = {
-    { name = 'WEAPON_JR_MK47', label = 'Mk47 Mutant', price = 0, category = 'Class 3' },
-    { name = 'WEAPON_JR_CARBINERIFLEMK2', label = 'CarbineRifle Mk2', price = 0, category = 'Class 3' },
-    { name = 'WEAPON_JR_ASSAULTRIFLEMK2', label = 'Assaultrifle Mk2', price = 0, category = 'Class 3' },
-    { name = 'WEAPON_JR_HEAVYRIFLE', label = 'PD Heavy Rifle', price = 0, category = 'Class 3' },
-    { name = 'WEAPON_AKS74U', label = 'AKS74U', price = 0, category = 'Class 2' },
-    { name = 'WEAPON_MPX', label = 'PD MPX', price = 0, category = 'Class 2' },
-    { name = 'WEAPON_JR_SICARIO', label = 'Sicario Smg', price = 0, category = 'Class 2' },
-    { name = 'WEAPON_JR_PDW', label = 'Combat PDW', price = 0, category = 'Class 2' },
-    { name = 'WEAPON_JR_PDCARBINE', label = 'PD Carbine', price = 0, category = 'Class 1' },
-    { name = 'WEAPON_JR_DEAGLE', label = 'Deagle', price = 0, category = 'Class 1' },
-    { name = 'WEAPON_JR_HEAVYPISTOL', label = 'Heavy Pistol', price = 0, category = 'Class 1' },
-    { name = 'WEAPON_JR_USP45', label = 'USP45', price = 0, category = 'Class 1' },
-    { name = 'WEAPON_FN509', label = 'PD Service Pistol MK2', price = 0, category = 'Class 1' },
-    { name = 'WEAPON_GLOCK20', label = 'PD Service Pistol', price = 0, category = 'Class 1' },
-    { name = 'WEAPON_JR_BERETTA', label = 'Beretta', price = 0, category = 'Class 1' },
-    { name = 'WEAPON_MP5', label = 'PD MP5', price = 0, category = 'Class 2' },
-    { name = 'oxy', label = 'oxy', price = 0, category = 'Ammo & Armour' },
-    { name = 'armor_vest', label = 'Armor Vest', price = 0, category = 'Ammo & Armour' },
-    { name = 'armor_plate1', label = 'Police Armor Plate', price = 0, category = 'Ammo & Armour' },
-    { name = 'pistol_box', label = 'Pistol Ammo', price = 0, category = 'Ammo & Armour' },
-    { name = 'smg_box', label = 'SMG Ammo', price = 0, category = 'Ammo & Armour' },
-    { name = 'greentint', label = 'Green Weapon Tint', price = 0, category = 'Attachments & Tints' },
-    { name = 'goldtint', label = 'Gold Weapon Tint', price = 0, category = 'Attachments & Tints' },
-    { name = 'pinktint', label = 'Pink Weapon Tint', price = 0, category = 'Attachments & Tints' },
-    { name = 'tantint', label = 'Tan Weapon Tint', price = 0, category = 'Attachments & Tints' },
-    { name = 'bluetint', label = 'Blue Weapon Tint', price = 0, category = 'Attachments & Tints' },
-    { name = 'orangetint', label = 'Orange Weapon Tint', price = 0, category = 'Attachments & Tints' },
-    { name = 'platinumtint', label = 'Platinum Weapon Tint', price = 0, category = 'Attachments & Tints' },
-    { name = 'at_scope_small', label = 'SMG Scope', price = 0, category = 'Attachments & Tints' },
-    { name = 'at_clip_extended_smg', label = 'SMG Extended', price = 0, category = 'Attachments & Tints' },
-    { name = 'at_suppressor_heavy', label = 'SMG Suppressor', price = 0, category = 'Attachments & Tints' },
-    { name = 'at_grip', label = 'SMG Grip', price = 0, category = 'Attachments & Tints' },
-  },
-
-
-
-  theme = {
-    primaryColor = 'blue',
-    primaryShade = 5,
-    customTheme  = {
-      -- Array of 9 colors from bright to dark
+    -- FIREARMS
+    {
+      name = 'weapon_pistol',
+      category = 'Firearms',
+      licenses = 'weapon',
+      price = 1500,
     },
-  },
+    {
+      name = 'weapon_snspistol',
+      category = 'Firearms',
+      price = 2000,
+    },
+    {
+      name = 'weapon_vintagepistol',
+      category = 'Firearms',
+      price = 2500,
+    },
+    -- MELE WEAPONS
+    {
+      name = 'weapon_bat',
+      category = 'Melee Weapons',
+      price = 100,
+    },
+    {
+      name ='weapon_hatchet',
+      category = 'Melee Weapons',
+      price = 300,
+    },
+    {
+      name = 'weapon_knife',
+      category = 'Melee Weapons',
+      price = 50,
+    },
+    -- AMMUNITION
+    {
+      name = 'ammo_pistol',
+      category = 'Ammunition',
+      price = 50,
+    },
+    {
+      name = 'ammo_shotgun',
+      category = 'Ammunition',
+      price = 75,
+    },
+    -- ACCESSORIES
+    {
+      name = 'weapon_flashlight',
+      category = 'Accessories',
+      price = 100,
+    },
+    {
+      name = 'weapon_suppressor',
+      category = 'Accessories',
+      price = 500,
+    },
 
+  },
 }
