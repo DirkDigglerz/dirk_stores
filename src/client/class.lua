@@ -55,3 +55,8 @@ RegisterNetEvent('dirk_stores:updateStore', function(id, data)
   end 
 end)
 
+exports('openStore', function(id)
+  local store = Stores[id]
+  if not store then return end
+  store:openStore()
+end)

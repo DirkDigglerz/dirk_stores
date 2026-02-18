@@ -17,7 +17,7 @@ export type SettingsProps = {
 };
 
 export const useSettings = create<SettingsProps>((set) => ({
-  game: 'fivem', // Default game setting
+  game: 'rdr3', // Default game setting
   primaryColor: 'red', // Default primary color
   primaryShade: 9,
   customTheme: [
@@ -52,10 +52,10 @@ export const useSettings = create<SettingsProps>((set) => ({
   },
 }));
 
-setInterval(() => {
-  if (isEnvBrowser()) {
-    useSettings.setState((state) => ({
-      game: state.game === 'rdr3' ? 'fivem' : 'rdr3',
-    }));
-  }
-}, 5000); // Fetch settings every 5 seconds in browser environment
+// setInterval(() => {
+//   if (isEnvBrowser()) {
+//     useSettings.setState((state) => ({
+//       game: state.game === 'rdr3' ? 'fivem' : 'rdr3',
+//     }));
+//   }
+// }, 5000); // Fetch settings every 5 seconds in browser environment

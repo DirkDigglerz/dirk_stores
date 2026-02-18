@@ -5,7 +5,11 @@ games { 'rdr3', 'gta5' }
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 author 'DirkScripts' 
 description 'Stores | Dirk Pack' 
+<<<<<<< HEAD
 version      '1.1.1'
+=======
+version      '1.1.9'
+>>>>>>> 9195b8a11ff613922dc5774bcec67198edd38201
 
 shared_script{
   '@dirk_lib/init.lua',
