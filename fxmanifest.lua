@@ -6,7 +6,7 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 author 'DirkScripts' 
 description 'Stores | Dirk Pack' 
 <<<<<<< HEAD
-version      '1.1.1'
+version      '1.1.2'
 =======
 version      '1.1.9'
 >>>>>>> 9195b8a11ff613922dc5774bcec67198edd38201
