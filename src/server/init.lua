@@ -1,4 +1,5 @@
 -- if using qb-core check if qb-shops or qb-pawnshops is running and stop it 
+BaseStores = BaseStores or {}
 lib.checkDependency('dirk_lib', '1.2.5', true)
 if lib.settings.framework == 'qb-core' then
   if GetResourceState('qb-shops') == 'started' then
